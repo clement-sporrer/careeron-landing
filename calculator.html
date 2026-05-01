@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerON — Time Waste Calculator</title>
+  <meta name="description" content="Find out how much time and money your university career services team is losing to manual processes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy: #0a0a0f;
+      --navy-card: #16161f;
+      --navy-card-2: #1e1e2a;
+      --teal: #00e0d0;
+      --teal-dim: rgba(0, 224, 208, 0.15);
+      --teal-glow: rgba(0, 224, 208, 0.08);
+      --mint: #7EDDA0;
+      --red: #ff6b6b;
+      --white: #ffffff;
+      --text-on-dark: rgba(255,255,255,0.85);
+      --text-secondary-dark: rgba(255,255,255,0.45);
+      --border-dark: rgba(255,255,255,0.07);
+      --border-teal: rgba(0,224,208,0.2);
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      color: var(--white);
+      background: var(--navy);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay */
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: 9999;
+      pointer-events: none; opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat; background-size: 128px;
+    }
+
+    /* Background orbs */
+    .bg-orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .orb {
+      position: absolute; border-radius: 50%; filter: blur(100px);
+    }
+    .orb-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,224,208,0.12) 0%, transparent 70%);
+      top: -15%; right: -10%;
+      animation: orbFloat 14s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(126,221,160,0.08) 0%, transparent 70%);
+      bottom: 10%; left: -8%;
+      animation: orbFloat 18s ease-in-out infinite reverse;
+    }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(25px, -18px) scale(1.04); }
+      66% { transform: translate(-15px, 12px) scale(0.97); }
+    }
+
+    /* Grid bg */
+    .grid-bg {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 20%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 20%, transparent 100%);
+    }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 24px;
+    }
+    nav .inner {
+      max-width: 1120px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+    }
+    .nav-logo {
+      font-family: var(--font-display); font-size: 1.25rem; font-weight: 800;
+      text-decoration: none; color: var(--white); letter-spacing: -0.03em;
+    }
+    .nav-logo span { color: var(--teal); }
+    .nav-back {
+      font-size: 0.82rem; font-weight: 500; color: var(--text-secondary-dark);
+      text-decoration: none; display: flex; align-items: center; gap: 6px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--white); }
+    .nav-back svg { width: 14px; height: 14px; }
+
+    /* Layout */
+    .page-wrap {
+      position: relative; z-index: 1;
+      min-height: 100vh;
+      padding: 100px 24px 80px;
+    }
+    .container { max-width: 760px; margin: 0 auto; }
+
+    /* Header */
+    .page-header { text-align: center; margin-bottom: 56px; }
+    .eyebrow {
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.14em; color: var(--teal);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      margin-bottom: 20px;
+    }
+    .eyebrow-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--teal);
+      box-shadow: 0 0 8px var(--teal);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    h1 {
+      font-family: var(--font-display); font-size: clamp(2rem, 4.5vw, 3.25rem);
+      font-weight: 800; line-height: 1.08; letter-spacing: -0.035em;
+      margin-bottom: 20px;
+    }
+    h1 .teal { color: var(--teal); }
+    .subtitle {
+      font-size: 1.05rem; line-height: 1.7; color: var(--text-secondary-dark);
+      max-width: 520px; margin: 0 auto;
+    }
+
+    /* Calculator card */
+    .calc-card {
+      background: var(--navy-card);
+      border: 1px solid var(--border-dark);
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 24px;
+    }
+    .calc-card-title {
+      font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+      color: var(--text-on-dark); margin-bottom: 28px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .calc-card-title .step-badge {
+      width: 26px; height: 26px; border-radius: 8px;
+      background: var(--teal-dim); border: 1px solid var(--border-teal);
+      color: var(--teal); font-size: 0.72rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-body);
+    }
+
+    /* Form grid */
+    .fields-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+    .fields-grid.single { grid-template-columns: 1fr; }
+    @media (max-width: 600px) { .fields-grid { grid-template-columns: 1fr; } }
+
+    .field { display: flex; flex-direction: column; gap: 8px; }
+    .field-label {
+      font-size: 0.82rem; font-weight: 600; color: var(--text-secondary-dark);
+      letter-spacing: 0.01em;
+    }
+    .field-label span {
+      font-weight: 400; color: rgba(255,255,255,0.25); margin-left: 4px;
+    }
+    .field-input-wrap { position: relative; }
+    .field-input {
+      width: 100%; background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px; padding: 12px 16px;
+      font-size: 0.95rem; font-family: var(--font-body);
+      color: var(--white); outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      appearance: none; -webkit-appearance: none;
+    }
+    .field-input:focus {
+      border-color: rgba(0,224,208,0.35);
+      background: rgba(0,224,208,0.04);
+    }
+    .field-input::placeholder { color: rgba(255,255,255,0.2); }
+    .field-suffix {
+      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+      font-size: 0.78rem; color: var(--text-secondary-dark); pointer-events: none;
+    }
+
+    /* Slider */
+    .slider-wrap { display: flex; flex-direction: column; gap: 10px; }
+    .slider-row { display: flex; align-items: center; gap: 14px; }
+    input[type=range] {
+      flex: 1; -webkit-appearance: none; appearance: none;
+      height: 4px; border-radius: 4px;
+      background: rgba(255,255,255,0.1); outline: none; cursor: pointer;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--teal); cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,224,208,0.4);
+      transition: transform 0.15s;
+    }
+    input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+    input[type=range]::-moz-range-thumb {
+      width: 18px; height: 18px; border-radius: 50%; border: none;
+      background: var(--teal); cursor: pointer;
+    }
+    .slider-value {
+      min-width: 52px; text-align: right;
+      font-size: 0.95rem; font-weight: 600; color: var(--teal);
+      font-family: var(--font-display);
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px; background: var(--border-dark);
+      margin: 32px 0;
+    }
+
+    /* Calculate button */
+    .calc-btn {
+      width: 100%; padding: 16px 28px;
+      background: var(--teal); color: var(--navy);
+      border: none; border-radius: 12px;
+      font-family: var(--font-body); font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      letter-spacing: -0.01em;
+    }
+    .calc-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 28px rgba(0,224,208,0.3), 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .calc-btn:active { transform: translateY(0); }
+    .calc-btn svg { width: 18px; height: 18px; transition: transform 0.2s; }
+    .calc-btn:hover svg { transform: translateX(3px); }
+
+    /* Results */
+    .results {
+      display: none; opacity: 0;
+      transition: opacity 0.4s ease;
+      margin-top: 24px;
+    }
+    .results.visible { display: block; }
+    .results.shown { opacity: 1; }
+
+    .results-header {
+      text-align: center; margin-bottom: 32px;
+    }
+    .results-header h2 {
+      font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px;
+    }
+    .results-header p {
+      font-size: 0.9rem; color: var(--text-secondary-dark);
+    }
+
+    .metrics-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 600px) { .metrics-grid { grid-template-columns: 1fr; } }
+
+    .metric-card {
+      background: var(--navy-card);
+      border: 1px solid var(--border-dark);
+      border-radius: 16px; padding: 24px 20px;
+      text-align: center;
+      transition: border-color 0.3s;
+    }
+    .metric-card:hover { border-color: var(--border-teal); }
+    .metric-card.highlight {
+      background: linear-gradient(135deg, rgba(0,224,208,0.08) 0%, rgba(0,224,208,0.03) 100%);
+      border-color: rgba(0,224,208,0.2);
+    }
+    .metric-card.warning {
+      background: linear-gradient(135deg, rgba(255,107,107,0.08) 0%, rgba(255,107,107,0.03) 100%);
+      border-color: rgba(255,107,107,0.2);
+    }
+    .metric-label {
+      font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--text-secondary-dark);
+      margin-bottom: 10px;
+    }
+    .metric-value {
+      font-family: var(--font-display); font-size: 1.9rem; font-weight: 800;
+      letter-spacing: -0.04em; line-height: 1;
+      margin-bottom: 6px;
+    }
+    .metric-card.highlight .metric-value { color: var(--teal); }
+    .metric-card.warning .metric-value { color: var(--red); }
+    .metric-sub {
+      font-size: 0.75rem; color: var(--text-secondary-dark); line-height: 1.4;
+    }
+
+    /* Breakdown */
+    .breakdown-card {
+      background: var(--navy-card);
+      border: 1px solid var(--border-dark);
+      border-radius: 16px; padding: 28px 32px;
+      margin-bottom: 16px;
+    }
+    .breakdown-title {
+      font-family: var(--font-display); font-size: 0.9rem; font-weight: 700;
+      color: var(--text-on-dark); margin-bottom: 20px;
+    }
+    .breakdown-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .breakdown-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .breakdown-label {
+      font-size: 0.85rem; color: var(--text-secondary-dark);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .breakdown-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    }
+    .breakdown-amount {
+      font-size: 0.95rem; font-weight: 600; color: var(--text-on-dark);
+    }
+
+    /* Bar chart */
+    .bar-chart { margin: 20px 0 0; }
+    .bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .bar-row:last-child { margin-bottom: 0; }
+    .bar-name { font-size: 0.78rem; color: var(--text-secondary-dark); width: 130px; flex-shrink: 0; }
+    .bar-track { flex: 1; height: 8px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; }
+    .bar-fill {
+      height: 100%; border-radius: 4px;
+      transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 0;
+    }
+    .bar-pct { font-size: 0.78rem; font-weight: 600; color: var(--text-on-dark); min-width: 36px; text-align: right; }
+
+    /* ROI card */
+    .roi-card {
+      background: linear-gradient(135deg, rgba(0,224,208,0.1) 0%, rgba(126,221,160,0.06) 100%);
+      border: 1px solid rgba(0,224,208,0.25);
+      border-radius: 16px; padding: 28px 32px;
+      margin-bottom: 24px;
+    }
+    .roi-card h3 {
+      font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+      color: var(--teal); margin-bottom: 16px;
+    }
+    .roi-compare {
+      display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: center;
+      margin-bottom: 20px;
+    }
+    .roi-side { text-align: center; }
+    .roi-side-label {
+      font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--text-secondary-dark); margin-bottom: 8px;
+    }
+    .roi-side-value {
+      font-family: var(--font-display); font-size: 1.6rem; font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+    .roi-side.bad .roi-side-value { color: var(--red); }
+    .roi-side.good .roi-side-value { color: var(--teal); }
+    .roi-arrow {
+      color: var(--text-secondary-dark); font-size: 1.5rem; font-weight: 300;
+    }
+    .roi-saving {
+      text-align: center; padding: 14px;
+      background: rgba(0,224,208,0.08); border: 1px solid rgba(0,224,208,0.15);
+      border-radius: 10px;
+    }
+    .roi-saving-label { font-size: 0.78rem; color: var(--text-secondary-dark); margin-bottom: 4px; }
+    .roi-saving-value {
+      font-family: var(--font-display); font-size: 1.4rem; font-weight: 800;
+      color: var(--teal); letter-spacing: -0.03em;
+    }
+
+    /* CTA */
+    .cta-card {
+      background: var(--navy-card);
+      border: 1px solid var(--border-dark);
+      border-radius: 20px; padding: 40px;
+      text-align: center;
+    }
+    .cta-card h2 {
+      font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      font-weight: 800; letter-spacing: -0.03em; margin-bottom: 12px;
+    }
+    .cta-card p {
+      font-size: 0.95rem; color: var(--text-secondary-dark);
+      max-width: 400px; margin: 0 auto 28px;
+    }
+    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--teal); color: var(--navy);
+      padding: 14px 28px; border-radius: 12px;
+      font-size: 0.9rem; font-weight: 700; text-decoration: none;
+      font-family: var(--font-body); border: none; cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 24px rgba(0,224,208,0.25), 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: rgba(255,255,255,0.55);
+      padding: 14px 24px; border-radius: 12px;
+      font-size: 0.9rem; font-weight: 500; text-decoration: none;
+      font-family: var(--font-body); border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.25s;
+    }
+    .btn-ghost:hover { color: var(--white); border-color: rgba(255,255,255,0.25); }
+
+    /* Footer note */
+    .footer-note {
+      text-align: center; margin-top: 40px;
+      font-size: 0.78rem; color: rgba(255,255,255,0.2);
+    }
+    .footer-note a { color: var(--teal); text-decoration: none; }
+    .footer-note a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<div class="bg-orbs">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+</div>
+<div class="grid-bg"></div>
+
+<nav>
+  <div class="inner">
+    <a href="index.html" class="nav-logo">Career<span>ON</span></a>
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M10 3L5 8l5 5"/>
+      </svg>
+      Back to site
+    </a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="container">
+
+    <!-- Header -->
+    <div class="page-header">
+      <div class="eyebrow">
+        <div class="eyebrow-dot"></div>
+        Free diagnostic tool
+      </div>
+      <h1>How much is your university<br><span class="teal">losing every year?</span></h1>
+      <p class="subtitle">Fill in 5 numbers. Get a precise breakdown of time wasted and money left on the table by your career services team.</p>
+    </div>
+
+    <!-- Step 1: University Info -->
+    <div class="calc-card">
+      <div class="calc-card-title">
+        <span class="step-badge">1</span>
+        Your university
+      </div>
+      <div class="fields-grid">
+        <div class="field">
+          <label class="field-label" for="students">
+            Number of enrolled students <span>(active)</span>
+          </label>
+          <div class="field-input-wrap">
+            <input class="field-input" type="number" id="students" placeholder="e.g. 2000" min="100" max="50000">
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label" for="consultants">
+            Career services staff <span>(FTE)</span>
+          </label>
+          <div class="field-input-wrap">
+            <input class="field-input" type="number" id="consultants" placeholder="e.g. 4" min="1" max="100">
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label" for="salary">
+            Avg. consultant annual salary <span>(€)</span>
+          </label>
+          <div class="field-input-wrap">
+            <input class="field-input" type="number" id="salary" placeholder="e.g. 45000" min="20000" max="200000">
+            <span class="field-suffix">€ / yr</span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label" for="student_ratio">
+            Students per consultant <span>(ratio)</span>
+          </label>
+          <div class="field-input-wrap">
+            <input class="field-input" type="number" id="student_ratio" placeholder="e.g. 500" min="10" max="5000">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Time Allocation -->
+    <div class="calc-card">
+      <div class="calc-card-title">
+        <span class="step-badge">2</span>
+        Weekly time breakdown per consultant
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-secondary-dark); margin-bottom: 28px; margin-top: -12px;">Estimate how many hours per week each consultant spends on the following manual tasks.</p>
+
+      <div class="field" style="margin-bottom: 24px;">
+        <label class="field-label">Student Q&A & individual coaching <span>(hrs/week)</span></label>
+        <div class="slider-wrap">
+          <div class="slider-row">
+            <input type="range" id="qa_hours" min="1" max="20" value="8" oninput="updateSlider('qa_hours', 'qa_val')">
+            <span class="slider-value" id="qa_val">8h</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="field" style="margin-bottom: 24px;">
+        <label class="field-label">Manual job matching & sourcing <span>(hrs/week)</span></label>
+        <div class="slider-wrap">
+          <div class="slider-row">
+            <input type="range" id="match_hours" min="1" max="20" value="6" oninput="updateSlider('match_hours', 'match_val')">
+            <span class="slider-value" id="match_val">6h</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="field" style="margin-bottom: 24px;">
+        <label class="field-label">CV reviews & feedback <span>(hrs/week)</span></label>
+        <div class="slider-wrap">
+          <div class="slider-row">
+            <input type="range" id="cv_hours" min="1" max="20" value="5" oninput="updateSlider('cv_hours', 'cv_val')">
+            <span class="slider-value" id="cv_val">5h</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Reporting & admin <span>(hrs/week)</span></label>
+        <div class="slider-wrap">
+          <div class="slider-row">
+            <input type="range" id="admin_hours" min="1" max="15" value="4" oninput="updateSlider('admin_hours', 'admin_val')">
+            <span class="slider-value" id="admin_val">4h</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calculate -->
+    <button class="calc-btn" onclick="calculate()">
+      Calculate my losses
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 10h12M10 4l6 6-6 6"/>
+      </svg>
+    </button>
+
+    <!-- Results -->
+    <div class="results" id="results">
+
+      <div class="results-header">
+        <h2>Here's what you're <span style="color: var(--red);">losing</span></h2>
+        <p>Based on your inputs — and conservative benchmarks from career services benchmarking data.</p>
+      </div>
+
+      <!-- Top metrics -->
+      <div class="metrics-grid">
+        <div class="metric-card warning">
+          <div class="metric-label">Hours lost / year</div>
+          <div class="metric-value" id="r_hours">—</div>
+          <div class="metric-sub">across your entire career services team</div>
+        </div>
+        <div class="metric-card warning">
+          <div class="metric-label">Cost of inefficiency</div>
+          <div class="metric-value" id="r_cost">—</div>
+          <div class="metric-sub">in staff salary burned on automatable tasks</div>
+        </div>
+        <div class="metric-card highlight">
+          <div class="metric-label">With CareerON</div>
+          <div class="metric-value" id="r_saved">—</div>
+          <div class="metric-sub">hours recaptured for high-value student work</div>
+        </div>
+      </div>
+
+      <!-- Breakdown -->
+      <div class="breakdown-card">
+        <div class="breakdown-title">Where the time goes</div>
+        <div class="bar-chart" id="bar_chart"></div>
+        <div class="divider"></div>
+        <div id="breakdown_rows"></div>
+      </div>
+
+      <!-- ROI comparison -->
+      <div class="roi-card">
+        <h3>CareerON ROI — at a glance</h3>
+        <div class="roi-compare">
+          <div class="roi-side bad">
+            <div class="roi-side-label">Current annual cost of waste</div>
+            <div class="roi-side-value" id="r_waste_cost">—</div>
+          </div>
+          <div class="roi-arrow">→</div>
+          <div class="roi-side good">
+            <div class="roi-side-label">CareerON annual fee</div>
+            <div class="roi-side-value">~€55K</div>
+          </div>
+        </div>
+        <div class="roi-saving">
+          <div class="roi-saving-label">Net saving in Year 1</div>
+          <div class="roi-saving-value" id="r_net_saving">—</div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-card">
+        <h2>See it live in your institution</h2>
+        <p>We'll walk you through a 30-min demo using your actual numbers — no pitch deck, no bullshit.</p>
+        <div class="cta-btns">
+          <a href="mailto:hadi.hijazi@bloqmedia.net?subject=CareerON Demo Request&body=Hi, I just ran the time waste calculator and would like to see a demo." class="btn-primary">
+            Book a demo
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </a>
+          <a href="index.html" class="btn-ghost">Learn more →</a>
+        </div>
+      </div>
+
+    </div>
+    <!-- /results -->
+
+    <div class="footer-note">
+      Built by <a href="index.html">CareerON</a> · Calculations based on conservative benchmarks · Not financial advice
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function updateSlider(sliderId, valId) {
+    const val = document.getElementById(sliderId).value;
+    document.getElementById(valId).textContent = val + 'h';
+    updateSliderFill(sliderId);
+  }
+
+  function updateSliderFill(id) {
+    const el = document.getElementById(id);
+    const min = el.min || 0, max = el.max || 100, val = el.value;
+    const pct = ((val - min) / (max - min)) * 100;
+    el.style.background = `linear-gradient(to right, #00e0d0 ${pct}%, rgba(255,255,255,0.1) ${pct}%)`;
+  }
+
+  // Init slider fills
+  ['qa_hours','match_hours','cv_hours','admin_hours'].forEach(id => updateSliderFill(id));
+
+  function fmt(n) {
+    if (n >= 1000000) return '€' + (n/1000000).toFixed(1) + 'M';
+    if (n >= 1000) return '€' + Math.round(n/1000) + 'K';
+    return '€' + Math.round(n);
+  }
+  function fmtHrs(n) {
+    if (n >= 1000) return Math.round(n/1000) + 'K hrs';
+    return Math.round(n) + ' hrs';
+  }
+  function fmtNum(n) {
+    return n.toLocaleString('en-US');
+  }
+
+  function calculate() {
+    const students = parseFloat(document.getElementById('students').value) || 2000;
+    const consultants = parseFloat(document.getElementById('consultants').value) || 4;
+    const salary = parseFloat(document.getElementById('salary').value) || 45000;
+
+    const qa_h = parseFloat(document.getElementById('qa_hours').value);
+    const match_h = parseFloat(document.getElementById('match_hours').value);
+    const cv_h = parseFloat(document.getElementById('cv_hours').value);
+    const admin_h = parseFloat(document.getElementById('admin_hours').value);
+
+    const total_manual_per_consultant = qa_h + match_h + cv_h + admin_h;
+    const working_weeks = 46;
+    const weekly_hours = 38;
+
+    // Annual hours
+    const qa_annual = qa_h * working_weeks * consultants;
+    const match_annual = match_h * working_weeks * consultants;
+    const cv_annual = cv_h * working_weeks * consultants;
+    const admin_annual = admin_h * working_weeks * consultants;
+    const total_manual_annual = qa_annual + match_annual + cv_annual + admin_annual;
+
+    // Cost (hourly rate from salary)
+    const hourly = salary / (working_weeks * weekly_hours);
+    const cost_of_waste = total_manual_annual * hourly;
+
+    // CareerON saves ~70% of manual time
+    const automation_rate = 0.70;
+    const hours_saved = total_manual_annual * automation_rate;
+    const cost_saved = hours_saved * hourly;
+
+    // ROI
+    const careeron_fee = 55000; // €55K benchmark
+    const net_saving = cost_saved - careeron_fee;
+
+    // Percentages for bars
+    const tasks = [
+      { label: 'Student Q&A & coaching', hours: qa_annual, color: '#00e0d0' },
+      { label: 'Job matching & sourcing', hours: match_annual, color: '#7EDDA0' },
+      { label: 'CV reviews & feedback', hours: cv_annual, color: '#5bc8f5' },
+      { label: 'Reporting & admin', hours: admin_annual, color: '#a78bfa' },
+    ];
+    const maxHrs = Math.max(...tasks.map(t => t.hours));
+
+    // Show results
+    const resultsEl = document.getElementById('results');
+    resultsEl.classList.add('visible');
+    setTimeout(() => resultsEl.classList.add('shown'), 10);
+
+    // Scroll to results
+    setTimeout(() => {
+      resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+
+    // Fill metrics
+    document.getElementById('r_hours').textContent = fmtNum(Math.round(total_manual_annual));
+    document.getElementById('r_cost').textContent = fmt(cost_of_waste);
+    document.getElementById('r_saved').textContent = fmtHrs(hours_saved);
+    document.getElementById('r_waste_cost').textContent = fmt(cost_of_waste);
+    document.getElementById('r_net_saving').textContent = net_saving > 0
+      ? fmt(net_saving) + ' saved'
+      : 'Break-even year 1';
+
+    // Bar chart
+    const barChart = document.getElementById('bar_chart');
+    barChart.innerHTML = tasks.map(t => {
+      const pct = maxHrs > 0 ? (t.hours / total_manual_annual * 100) : 0;
+      return `
+        <div class="bar-row">
+          <span class="bar-name">${t.label}</span>
+          <div class="bar-track">
+            <div class="bar-fill" style="background:${t.color}" data-pct="${pct.toFixed(0)}"></div>
+          </div>
+          <span class="bar-pct">${pct.toFixed(0)}%</span>
+        </div>
+      `;
+    }).join('');
+
+    // Animate bars
+    setTimeout(() => {
+      document.querySelectorAll('.bar-fill').forEach(el => {
+        el.style.width = el.dataset.pct + '%';
+      });
+    }, 50);
+
+    // Breakdown rows
+    const breakdownEl = document.getElementById('breakdown_rows');
+    const colors = ['#00e0d0','#7EDDA0','#5bc8f5','#a78bfa'];
+    breakdownEl.innerHTML = tasks.map((t, i) => `
+      <div class="breakdown-row">
+        <span class="breakdown-label">
+          <span class="breakdown-dot" style="background:${colors[i]}"></span>
+          ${t.label}
+        </span>
+        <span class="breakdown-amount">${fmtNum(Math.round(t.hours))} hrs/yr · ${fmt(t.hours * hourly)}</span>
+      </div>
+    `).join('') + `
+      <div class="breakdown-row" style="margin-top: 8px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08);">
+        <span class="breakdown-label" style="color: rgba(255,255,255,0.7); font-weight: 600;">Total manual work</span>
+        <span class="breakdown-amount" style="color: #ff6b6b; font-weight: 700;">${fmtNum(Math.round(total_manual_annual))} hrs/yr · ${fmt(cost_of_waste)}</span>
+      </div>
+    `;
+  }
+</script>
+</body>
+</html>
