@@ -7,26 +7,29 @@
   <meta name="description" content="CareerON helps business schools scale personalized career coaching with AI.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --navy: #0a0a0f;
-      --navy-card: #16161f;
-      --teal: #00e0d0;
-      --teal-dim: rgba(0, 224, 208, 0.15);
-      --teal-glow: rgba(0, 224, 208, 0.08);
-      --mint: #7EDDA0;
-      --surface: #fafafa;
+      --navy: #0B132B;
+      --navy-card: #1A2238;
+      --purple: #6C5CE7;
+      --purple-dim: rgba(108, 92, 231, 0.15);
+      --purple-glow: rgba(108, 92, 231, 0.08);
+      --blue: #2979FF;
+      --success: #00C7A7;
+      --gradient: linear-gradient(135deg, #6C5CE7 0%, #2979FF 100%);
+      --gradient-soft: linear-gradient(135deg, rgba(108,92,231,0.18) 0%, rgba(41,121,255,0.18) 100%);
+      --surface: #F2F4F7;
       --white: #ffffff;
-      --text: #0a0a0f;
-      --text-secondary: #64647a;
-      --text-tertiary: #9c9cb0;
-      --border: rgba(0,0,0,0.06);
+      --text: #0B132B;
+      --text-secondary: #5A6479;
+      --text-tertiary: #98A1B3;
+      --border: rgba(11,19,43,0.08);
       --border-light: rgba(255,255,255,0.06);
-      --font-display: 'Syne', sans-serif;
-      --font-body: 'DM Sans', sans-serif;
+      --font-display: 'Sora', sans-serif;
+      --font-body: 'Sora', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -40,7 +43,7 @@
       overflow-x: hidden;
     }
 
-    ::selection { background: var(--teal); color: var(--navy); }
+    ::selection { background: var(--purple); color: var(--white); }
 
     /* --- GRAIN OVERLAY --- */
     body::after {
@@ -58,14 +61,14 @@
     .container-narrow { max-width: 720px; margin: 0 auto; padding: 0 24px; }
 
     /* --- TYPOGRAPHY --- */
-    h1, h2, h3 { font-family: var(--font-display); line-height: 1.08; letter-spacing: -0.035em; }
-    h1 { font-size: clamp(2.75rem, 5.5vw, 4.25rem); font-weight: 800; }
-    h2 { font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 700; }
-    h3 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3; }
+    h1, h2, h3 { font-family: var(--font-display); line-height: 1.08; letter-spacing: -0.04em; }
+    h1 { font-size: clamp(2.75rem, 5.5vw, 4.25rem); font-weight: 700; }
+    h2 { font-size: clamp(2rem, 4vw, 3.15rem); font-weight: 600; letter-spacing: -0.035em; }
+    h3 { font-size: 1.15rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3; }
 
     .eyebrow {
       font-family: var(--font-body); font-size: 0.75rem; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.14em; color: var(--teal);
+      text-transform: uppercase; letter-spacing: 0.14em; color: var(--purple);
       margin-bottom: 16px; display: block;
     }
     .lead {
@@ -89,12 +92,20 @@
       height: 72px;
     }
     .nav-logo {
-      font-family: var(--font-display); font-size: 1.3rem; font-weight: 800;
-      text-decoration: none; color: var(--white); letter-spacing: -0.03em;
+      font-family: var(--font-display); font-size: 1.3rem; font-weight: 700;
+      text-decoration: none; color: var(--white); letter-spacing: -0.025em;
       transition: color 0.3s;
+      display: inline-flex; align-items: center; gap: 9px;
     }
+    .nav-logo .brand-mark { width: 60px; height: 60px; flex-shrink: 0; object-fit: contain; margin: -14px -8px -14px -10px; }
     nav.scrolled .nav-logo { color: var(--text); }
-    .nav-logo span { color: var(--teal); }
+    .nav-logo span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
     .nav-right { display: flex; align-items: center; gap: 8px; }
     .nav-link {
       font-size: 0.82rem; font-weight: 500; color: rgba(255,255,255,0.55);
@@ -105,12 +116,13 @@
     nav.scrolled .nav-link { color: var(--text-secondary); }
     nav.scrolled .nav-link:hover { color: var(--text); background: rgba(0,0,0,0.04); }
     .nav-cta {
-      font-size: 0.82rem; font-weight: 600; color: var(--navy) !important;
-      background: var(--teal) !important; padding: 8px 18px !important;
+      font-size: 0.82rem; font-weight: 600; color: var(--white) !important;
+      background: var(--gradient) !important; padding: 8px 18px !important;
       border-radius: 8px; transition: all 0.2s !important; border: none; cursor: pointer;
       text-decoration: none; font-family: var(--font-body);
+      box-shadow: 0 1px 2px rgba(11,19,43,0.12);
     }
-    .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(108,92,231,0.32); }
     .lang-btn {
       font-size: 0.75rem; font-weight: 600; padding: 6px 10px;
       border-radius: 6px; border: 1px solid rgba(255,255,255,0.15);
@@ -148,19 +160,19 @@
     }
     .hero-orb-1 {
       width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(0,224,208,0.18) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(108,92,231,0.18) 0%, transparent 70%);
       top: -20%; right: -10%;
       animation: orbFloat 12s ease-in-out infinite;
     }
     .hero-orb-2 {
       width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(126,221,160,0.12) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(41,121,255,0.12) 0%, transparent 70%);
       bottom: -10%; left: -5%;
       animation: orbFloat 16s ease-in-out infinite reverse;
     }
     .hero-orb-3 {
       width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(0,224,208,0.1) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(108,92,231,0.1) 0%, transparent 70%);
       top: 40%; left: 30%;
       animation: orbFloat 10s ease-in-out infinite 2s;
     }
@@ -191,35 +203,43 @@
       margin-bottom: 32px; backdrop-filter: blur(8px);
     }
     .hero-badge-dot {
-      width: 8px; height: 8px; border-radius: 50%; background: var(--teal);
-      box-shadow: 0 0 8px var(--teal);
+      width: 8px; height: 8px; border-radius: 50%; background: var(--purple);
+      box-shadow: 0 0 8px var(--purple);
       animation: pulse 2s ease-in-out infinite;
     }
     @keyframes pulse {
       0%, 100% { opacity: 1; } 50% { opacity: 0.5; }
     }
     .hero h1 { margin-bottom: 28px; }
-    .hero h1 .teal-word {
-      color: var(--teal);
-      text-decoration: underline;
-      text-decoration-color: rgba(0,224,208,0.3);
-      text-underline-offset: 6px;
-      text-decoration-thickness: 3px;
+    .hero h1 .brand-word {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      position: relative;
+      display: inline-block;
+    }
+    .hero h1 .brand-word::after {
+      content: ''; position: absolute; left: 0; right: 0; bottom: -6px;
+      height: 3px; border-radius: 2px;
+      background: var(--gradient);
+      opacity: 0.35;
     }
     .hero .lead { margin-bottom: 48px; max-width: 520px; }
     .hero-ctas { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
     .btn-primary {
       display: inline-flex; align-items: center; gap: 8px;
-      background: var(--teal); color: var(--navy);
+      background: var(--gradient); color: var(--white);
       padding: 14px 28px; border-radius: 12px;
       font-size: 0.9rem; font-weight: 600; text-decoration: none;
       font-family: var(--font-body); border: none; cursor: pointer;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 0 0 0 rgba(0,224,208,0), 0 1px 2px rgba(0,0,0,0.2);
+      box-shadow: 0 0 0 0 rgba(108,92,231,0), 0 1px 2px rgba(0,0,0,0.2);
     }
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 24px rgba(0,224,208,0.25), 0 4px 12px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 28px rgba(108,92,231,0.4), 0 4px 12px rgba(41,121,255,0.2);
     }
     .btn-ghost {
       display: inline-flex; align-items: center; gap: 8px;
@@ -243,6 +263,18 @@
     }
     .btn-outline-light:hover { border-color: rgba(0,0,0,0.25); background: rgba(0,0,0,0.02); }
 
+    .hero-quiet-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 24px;
+      font-size: 0.82rem; font-weight: 500;
+      color: rgba(255,255,255,0.55); text-decoration: none;
+      transition: all 0.2s;
+    }
+    .hero-quiet-link svg:first-child { color: #A99BFF; }
+    .hero-quiet-link svg:last-child { transition: transform 0.2s; opacity: 0.7; }
+    .hero-quiet-link:hover { color: var(--white); }
+    .hero-quiet-link:hover svg:last-child { transform: translateX(3px); opacity: 1; }
+
     /* Hero visual */
     .hero-visual-row {
       display: grid; grid-template-columns: 5fr 3fr 4fr; gap: 14px;
@@ -254,7 +286,7 @@
       backdrop-filter: blur(12px);
       transition: border-color 0.3s;
     }
-    .hero-card:hover { border-color: rgba(0,224,208,0.2); }
+    .hero-card:hover { border-color: rgba(108,92,231,0.2); }
     .hero-card-label {
       font-size: 0.65rem; font-weight: 600; text-transform: uppercase;
       letter-spacing: 0.1em; color: rgba(255,255,255,0.3); margin-bottom: 10px;
@@ -269,19 +301,19 @@
       align-items: center; justify-content: center;
     }
     .chat-avatar.student { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); }
-    .chat-avatar.ai { background: var(--teal-dim); color: var(--teal); }
+    .chat-avatar.ai { background: var(--purple-dim); color: var(--purple); }
     .chat-text {
       font-size: 0.78rem; line-height: 1.5; color: rgba(255,255,255,0.65);
       padding: 8px 12px; border-radius: 10px;
       background: rgba(255,255,255,0.04);
     }
     .chat-text.ai-text {
-      background: rgba(0,224,208,0.06); border: 1px solid rgba(0,224,208,0.1);
+      background: rgba(108,92,231,0.06); border: 1px solid rgba(108,92,231,0.1);
       color: rgba(255,255,255,0.8);
     }
     .typing-dots { display: flex; gap: 4px; padding: 10px 14px; }
     .typing-dots span {
-      width: 5px; height: 5px; border-radius: 50%; background: var(--teal);
+      width: 5px; height: 5px; border-radius: 50%; background: var(--purple);
       opacity: 0.4; animation: blink 1.4s infinite;
     }
     .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
@@ -299,7 +331,7 @@
     .mini-score-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
     .mini-score-ring circle { fill: none; stroke-width: 4; }
     .mini-score-ring .bg { stroke: rgba(255,255,255,0.08); }
-    .mini-score-ring .fill { stroke: var(--teal); stroke-linecap: round; stroke-dasharray: 138.2; stroke-dashoffset: 30; transition: stroke-dashoffset 1s; }
+    .mini-score-ring .fill { stroke: var(--purple); stroke-linecap: round; stroke-dasharray: 138.2; stroke-dashoffset: 30; transition: stroke-dashoffset 1s; }
     .mini-score-number {
       position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
       font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; color: var(--white);
@@ -311,30 +343,47 @@
     .mini-bar-row { display: flex; align-items: center; gap: 10px; }
     .mini-bar-label { font-size: 0.7rem; color: rgba(255,255,255,0.4); width: 80px; flex-shrink: 0; }
     .mini-bar-track { flex: 1; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.06); }
-    .mini-bar-fill { height: 100%; border-radius: 2px; background: var(--teal); }
+    .mini-bar-fill { height: 100%; border-radius: 2px; background: var(--purple); }
 
-    /* --- LOGOS / TRUST --- */
+    /* --- BRAND PILLARS STRIP --- */
     .trust-strip {
-      padding: 48px 0;
+      padding: 64px 0;
       border-bottom: 1px solid var(--border);
+      background: var(--white);
+      position: relative;
     }
-    .trust-inner {
-      display: flex; align-items: center; justify-content: center;
-      gap: 48px; flex-wrap: wrap;
+    .trust-strip::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 120px; height: 1px;
+      background: var(--gradient);
+      opacity: 0.6;
     }
-    .trust-label {
-      font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.12em; color: var(--text-tertiary); white-space: nowrap;
+    .pillars-line {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 32px; max-width: 880px; margin: 0 auto;
     }
-    .trust-logos {
-      display: flex; gap: 36px; align-items: center; flex-wrap: wrap; justify-content: center;
+    .pillar-line-item {
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      gap: 10px;
     }
-    .trust-logo {
-      font-family: var(--font-display); font-size: 1.15rem; font-weight: 800;
-      color: var(--text); opacity: 0.25; transition: opacity 0.2s;
-      letter-spacing: -0.03em;
+    .pillar-diamond {
+      width: 14px; height: 14px;
+      background: var(--gradient);
+      transform: rotate(45deg);
+      border-radius: 3px;
+      box-shadow: 0 4px 12px rgba(108,92,231,0.25);
     }
-    .trust-logo:hover { opacity: 0.5; }
+    .pillar-line-name {
+      font-family: var(--font-display); font-size: 1.05rem; font-weight: 600;
+      color: var(--text); letter-spacing: -0.02em;
+    }
+    .pillar-line-desc {
+      font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;
+      max-width: 220px;
+    }
+    @media (max-width: 700px) {
+      .pillars-line { grid-template-columns: 1fr; gap: 28px; }
+    }
 
     /* --- PROBLEM --- */
     .problem {
@@ -350,7 +399,7 @@
       font-family: var(--font-body); font-style: italic;
       font-size: 1.1rem; line-height: 1.7;
       color: var(--text-secondary);
-      border-left: 3px solid var(--teal); padding-left: 20px;
+      border-left: 3px solid var(--purple); padding-left: 20px;
       margin-top: 32px;
     }
     .stat-stack { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -359,10 +408,15 @@
       background: var(--surface); border: 1px solid var(--border);
       transition: all 0.25s;
     }
-    .stat-block:hover { border-color: rgba(0,224,208,0.2); transform: translateY(-2px); }
+    .stat-block:hover { border-color: rgba(108,92,231,0.2); transform: translateY(-2px); }
     .stat-number {
-      font-family: var(--font-display); font-size: 2.25rem; font-weight: 800;
-      color: var(--text); letter-spacing: -0.04em; line-height: 1;
+      font-family: var(--font-display); font-size: 2.5rem; font-weight: 700;
+      letter-spacing: -0.045em; line-height: 1;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
     }
     .stat-label {
       font-size: 0.78rem; color: var(--text-tertiary); margin-top: 6px; line-height: 1.4;
@@ -395,18 +449,19 @@
       border-radius: 20px; padding: 36px 28px;
       position: relative; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .pillar:hover { border-color: rgba(0,224,208,0.15); transform: translateY(-4px); }
+    .pillar:hover { border-color: rgba(108,92,231,0.15); transform: translateY(-4px); }
     .pillar-number {
       font-family: var(--font-display); font-size: 4rem; font-weight: 800;
       color: rgba(255,255,255,0.04); position: absolute; top: 16px; right: 24px;
       line-height: 1; letter-spacing: -0.05em;
     }
     .pillar-icon {
-      width: 44px; height: 44px; border-radius: 12px;
-      background: var(--teal-dim); display: flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; border-radius: 14px;
+      background: var(--gradient); display: flex; align-items: center; justify-content: center;
       margin-bottom: 24px;
+      box-shadow: 0 8px 20px rgba(108,92,231,0.3);
     }
-    .pillar-icon svg { width: 20px; height: 20px; stroke: var(--teal); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .pillar-icon svg { width: 22px; height: 22px; stroke: var(--white); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .pillar h3 { margin-bottom: 10px; color: var(--white); }
     .pillar p { font-size: 0.88rem; color: rgba(255,255,255,0.45); line-height: 1.6; }
     .pillar-list {
@@ -419,7 +474,7 @@
     }
     .pillar-list li::before {
       content: ''; position: absolute; left: 0; top: 8px;
-      width: 5px; height: 5px; border-radius: 50%; background: var(--teal);
+      width: 5px; height: 5px; border-radius: 50%; background: var(--purple);
     }
 
     /* --- BENTO FEATURES --- */
@@ -441,15 +496,15 @@
       overflow: hidden; position: relative;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .bento-card:hover { border-color: rgba(0,224,208,0.25); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.04); }
+    .bento-card:hover { border-color: rgba(108,92,231,0.25); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.04); }
     .bento-wide { grid-column: span 7; }
     .bento-narrow { grid-column: span 5; }
     .bento-half { grid-column: span 6; }
     .bento-third { grid-column: span 4; }
     .bento-tag {
       font-size: 0.68rem; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.1em; color: var(--teal);
-      background: var(--teal-dim); padding: 4px 10px;
+      letter-spacing: 0.1em; color: var(--purple);
+      background: var(--purple-dim); padding: 4px 10px;
       border-radius: 4px; display: inline-block; margin-bottom: 14px;
       width: fit-content;
     }
@@ -467,29 +522,37 @@
       background: var(--surface); border-radius: 12px; padding: 12px 16px;
       border: 1px solid var(--border); transition: all 0.2s;
     }
-    .mock-track:hover { border-color: rgba(0,224,208,0.2); }
+    .mock-track:hover { border-color: rgba(108,92,231,0.2); }
     .mock-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
     .mock-track-name { font-size: 0.82rem; font-weight: 600; flex: 1; }
     .mock-track-count {
       font-size: 0.68rem; font-weight: 600; padding: 2px 8px; border-radius: 100px;
-      background: var(--teal-dim); color: var(--teal);
+      background: var(--purple-dim); color: var(--purple);
     }
 
     /* Mock: resume score */
     .mock-resume { width: 100%; }
     .mock-resume-top { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; }
     .mock-big-score {
-      font-family: var(--font-display); font-size: 3rem; font-weight: 800;
-      color: var(--text); letter-spacing: -0.04em; line-height: 1;
+      font-family: var(--font-display); font-size: 3rem; font-weight: 700;
+      letter-spacing: -0.045em; line-height: 1;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
     }
-    .mock-big-score small { font-size: 1rem; font-weight: 500; color: var(--text-tertiary); }
+    .mock-big-score small {
+      font-size: 1rem; font-weight: 500; color: var(--text-tertiary);
+      -webkit-text-fill-color: var(--text-tertiary);
+    }
     .mock-target { font-size: 0.78rem; color: var(--text-tertiary); text-align: right; }
     .mock-target strong { display: block; font-size: 0.85rem; color: var(--text); }
     .mock-bars { display: flex; flex-direction: column; gap: 10px; }
     .mock-bar-row { display: flex; align-items: center; gap: 12px; }
     .mock-bar-label { font-size: 0.75rem; color: var(--text-secondary); width: 100px; flex-shrink: 0; }
     .mock-bar-track { flex: 1; height: 6px; border-radius: 3px; background: var(--surface); }
-    .mock-bar-fill { height: 100%; border-radius: 3px; background: var(--teal); transition: width 1s cubic-bezier(0.16, 1, 0.3, 1); }
+    .mock-bar-fill { height: 100%; border-radius: 3px; background: var(--purple); transition: width 1s cubic-bezier(0.16, 1, 0.3, 1); }
     .mock-bar-val { font-size: 0.72rem; font-weight: 600; color: var(--text); width: 32px; text-align: right; }
 
     /* Mock: dashboard KPIs */
@@ -526,7 +589,7 @@
       border: 1px solid var(--border); background: var(--surface);
       transition: all 0.3s;
     }
-    .audience-card:hover { border-color: rgba(0,224,208,0.2); }
+    .audience-card:hover { border-color: rgba(108,92,231,0.2); }
     .audience-card h3 { font-size: 1.35rem; margin-bottom: 6px; }
     .audience-subtitle { font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 24px; }
     .audience-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
@@ -536,7 +599,7 @@
     }
     .check-icon {
       width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px;
-      stroke: var(--teal); fill: none; stroke-width: 2.5;
+      stroke: var(--purple); fill: none; stroke-width: 2.5;
     }
 
     /* --- TEAM --- */
@@ -554,16 +617,17 @@
       border-radius: 20px; padding: 36px 28px; text-align: center;
       transition: all 0.3s;
     }
-    .team-card:hover { border-color: rgba(0,224,208,0.2); transform: translateY(-2px); }
+    .team-card:hover { border-color: rgba(108,92,231,0.2); transform: translateY(-2px); }
     .team-initials {
       width: 72px; height: 72px; border-radius: 16px;
-      background: var(--navy); color: var(--teal);
-      font-family: var(--font-display); font-size: 1.4rem; font-weight: 800;
+      background: var(--gradient); color: var(--white);
+      font-family: var(--font-display); font-size: 1.4rem; font-weight: 700;
       display: flex; align-items: center; justify-content: center;
       margin: 0 auto 20px;
+      box-shadow: 0 6px 18px rgba(108,92,231,0.25);
     }
     .team-card h3 { font-size: 1.05rem; margin-bottom: 4px; }
-    .team-role { font-size: 0.82rem; color: var(--teal); font-weight: 500; margin-bottom: 12px; }
+    .team-role { font-size: 0.82rem; color: var(--purple); font-weight: 500; margin-bottom: 12px; }
     .team-bio { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.55; }
     .team-link {
       display: inline-block; margin-top: 12px; font-size: 0.78rem;
@@ -571,17 +635,189 @@
       border-bottom: 1px solid var(--border); padding-bottom: 1px;
       transition: all 0.2s;
     }
-    .team-link:hover { color: var(--teal); border-color: var(--teal); }
+    .team-link:hover { color: var(--purple); border-color: var(--purple); }
+
+    /* --- EMBEDDED CALCULATOR --- */
+    .embed-calc {
+      padding: 120px 0;
+      background: var(--surface);
+      position: relative;
+    }
+    .embed-calc-header { text-align: center; max-width: 620px; margin: 0 auto 48px; }
+    .embed-calc-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 24px; overflow: hidden;
+      box-shadow: 0 12px 40px rgba(11,19,43,0.06);
+      max-width: 1080px; margin: 0 auto;
+    }
+    .embed-calc-grid {
+      display: grid; grid-template-columns: 1.05fr 1fr;
+    }
+    .embed-calc-inputs {
+      padding: 44px;
+      border-right: 1px solid var(--border);
+    }
+    .embed-calc-section-label {
+      font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--text-tertiary);
+      margin-bottom: 24px;
+    }
+    .embed-field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 22px; }
+    .embed-field-label {
+      font-size: 0.85rem; font-weight: 500; color: var(--text);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .embed-field-label .hint { font-weight: 400; color: var(--text-tertiary); font-size: 0.78rem; }
+    .embed-input-wrap { position: relative; }
+    .embed-input {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 0.95rem; font-family: var(--font-body);
+      color: var(--text); outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      appearance: none; -webkit-appearance: none;
+    }
+    .embed-input-wrap:has(.embed-suffix) .embed-input { padding-right: 32px; }
+    .embed-input:focus {
+      border-color: var(--purple);
+      background: var(--white);
+      box-shadow: 0 0 0 3px rgba(108,92,231,0.12);
+    }
+    .embed-input::-webkit-outer-spin-button,
+    .embed-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .embed-suffix {
+      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+      font-size: 0.78rem; color: var(--text-tertiary); pointer-events: none;
+    }
+    .embed-slider-row { display: flex; align-items: center; gap: 14px; margin-top: 4px; }
+    .embed-slider {
+      flex: 1; -webkit-appearance: none; appearance: none;
+      height: 6px; border-radius: 3px;
+      background: var(--surface);
+      outline: none; cursor: pointer;
+    }
+    .embed-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--white);
+      border: 2.5px solid var(--purple);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(108,92,231,0.3);
+      transition: transform 0.15s;
+    }
+    .embed-slider::-webkit-slider-thumb:hover { transform: scale(1.1); }
+    .embed-slider::-moz-range-thumb {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--white);
+      border: 2.5px solid var(--purple);
+      cursor: pointer;
+    }
+    .embed-slider-value {
+      font-family: var(--font-display); font-size: 1.05rem; font-weight: 600;
+      color: var(--text);
+      width: 56px; text-align: right;
+      letter-spacing: -0.02em;
+    }
+
+    .embed-calc-result {
+      padding: 44px;
+      background: var(--navy);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .embed-calc-result::before {
+      content: ''; position: absolute; top: -40%; right: -30%;
+      width: 380px; height: 380px;
+      background: radial-gradient(circle, rgba(108,92,231,0.25) 0%, transparent 70%);
+      filter: blur(60px);
+      pointer-events: none;
+    }
+    .embed-calc-result::after {
+      content: ''; position: absolute; bottom: -30%; left: -20%;
+      width: 320px; height: 320px;
+      background: radial-gradient(circle, rgba(41,121,255,0.18) 0%, transparent 70%);
+      filter: blur(60px);
+      pointer-events: none;
+    }
+    .embed-result-inner { position: relative; z-index: 1; }
+    .embed-result-label {
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.14em; color: rgba(255,255,255,0.5);
+      margin-bottom: 14px;
+    }
+    .embed-result-big {
+      font-family: var(--font-display);
+      font-size: clamp(2.75rem, 5.5vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.045em; line-height: 1;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      margin-bottom: 6px;
+    }
+    .embed-result-sub {
+      font-size: 0.92rem; color: rgba(255,255,255,0.65);
+      margin-bottom: 28px;
+    }
+    .embed-result-meta {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+      padding: 20px 0; margin: 0 0 28px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .embed-meta-block .embed-meta-label {
+      font-size: 0.7rem; font-weight: 500; color: rgba(255,255,255,0.45);
+      letter-spacing: 0.04em; margin-bottom: 6px;
+    }
+    .embed-meta-block .embed-meta-value {
+      font-family: var(--font-display); font-size: 1.4rem; font-weight: 600;
+      letter-spacing: -0.025em;
+    }
+    .embed-meta-block .embed-meta-value.success { color: var(--success); }
+    .embed-result-cta {
+      display: flex; gap: 10px; flex-wrap: wrap;
+    }
+    .embed-result-cta .btn-primary { padding: 12px 22px; font-size: 0.85rem; }
+    .embed-result-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.82rem; color: rgba(255,255,255,0.6);
+      text-decoration: none; padding: 12px 8px;
+      transition: color 0.2s;
+    }
+    .embed-result-link svg { transition: transform 0.2s; }
+    .embed-result-link:hover { color: var(--white); }
+    .embed-result-link:hover svg { transform: translateX(3px); }
+
+    @media (max-width: 860px) {
+      .embed-calc-grid { grid-template-columns: 1fr; }
+      .embed-calc-inputs { border-right: none; border-bottom: 1px solid var(--border); padding: 32px; }
+      .embed-calc-result { padding: 32px; }
+      .embed-result-meta { grid-template-columns: 1fr; }
+    }
 
     /* --- CTA --- */
     .cta-section {
-      padding: 120px 0;
+      padding: 140px 0 130px;
       background: var(--navy); color: var(--white);
       text-align: center; position: relative; overflow: hidden;
     }
     .cta-section::before {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 50% 50% at 50% 100%, rgba(0,224,208,0.08) 0%, transparent 100%);
+      background:
+        radial-gradient(ellipse 70% 55% at 30% 100%, rgba(108,92,231,0.22) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 55% at 70% 100%, rgba(41,121,255,0.18) 0%, transparent 60%);
+    }
+    .cta-section::after {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 220px; height: 1px;
+      background: var(--gradient);
+      opacity: 0.5;
     }
     .cta-section .container { position: relative; z-index: 1; }
     .cta-section h2 { margin-bottom: 16px; }
@@ -591,16 +827,35 @@
     /* --- FOOTER --- */
     footer {
       background: var(--navy); border-top: 1px solid rgba(255,255,255,0.05);
-      padding: 32px 0; color: rgba(255,255,255,0.3);
+      padding: 36px 0; color: rgba(255,255,255,0.35);
+      position: relative;
+    }
+    footer::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(108,92,231,0.5) 30%, rgba(41,121,255,0.5) 70%, transparent 100%);
     }
     footer .container {
       display: flex; justify-content: space-between; align-items: center;
+      gap: 32px; flex-wrap: wrap;
+    }
+    .footer-tagline {
+      font-size: 0.78rem; color: rgba(255,255,255,0.4);
+      letter-spacing: -0.01em;
     }
     .footer-logo {
       font-family: var(--font-display); font-size: 1.05rem; font-weight: 700;
-      color: rgba(255,255,255,0.5);
+      color: rgba(255,255,255,0.7); letter-spacing: -0.02em;
+      display: inline-flex; align-items: center; gap: 8px;
     }
-    .footer-logo span { color: var(--teal); }
+    .footer-logo .brand-mark { width: 48px; height: 48px; flex-shrink: 0; object-fit: contain; margin: -10px -6px -10px -8px; }
+    .footer-logo span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
     footer small { font-size: 0.75rem; }
 
     /* --- ANIMATIONS --- */
@@ -644,17 +899,17 @@
 <!-- NAV -->
 <nav id="mainNav">
   <div class="inner">
-    <a href="#" class="nav-logo">Career<span>ON</span></a>
+    <a href="#" class="nav-logo"><img src="icon.png" class="brand-mark" alt="">Career<span>ON</span></a>
     <div class="nav-right">
       <a href="#solution" class="nav-link"><span data-fr>Solution</span><span data-en>Solution</span></a>
       <a href="#features" class="nav-link"><span data-fr>Fonctionnalités</span><span data-en>Features</span></a>
       <a href="#team" class="nav-link"><span data-fr>Équipe</span><span data-en>Team</span></a>
       <button class="lang-btn" onclick="toggleLang()">EN / FR</button>
-      <a href="calculator.html" class="nav-link" style="display:inline-flex;align-items:center;gap:6px;">
+      <a href="#calculator" class="nav-link" style="display:inline-flex;align-items:center;gap:6px;">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
         <span data-fr>Calculateur</span><span data-en>Calculator</span>
       </a>
-      <a href="#contact" class="nav-cta"><span data-fr>Demo</span><span data-en>Demo</span></a>
+      <a href="https://cal.com/hadi-hijazi-bloq-ai/careeron-intro" target="_blank" rel="noopener" class="nav-cta"><span data-fr>Demo</span><span data-en>Demo</span></a>
       <button class="mobile-toggle" onclick="this.classList.toggle('open')" aria-label="Menu">
         <span></span><span></span>
       </button>
@@ -674,30 +929,32 @@
     <div class="hero-content reveal">
       <div class="hero-badge">
         <div class="hero-badge-dot"></div>
-        <span data-fr>Plateforme IA pour services carrières</span>
-        <span data-en>AI platform for career services</span>
+        <span data-fr>Services carrière intelligents. Résultats supérieurs.</span>
+        <span data-en>Smarter career services. Stronger outcomes.</span>
       </div>
       <h1>
-        <span data-fr>Accompagnez chaque étudiant.<br><span class="teal-word">À grande échelle.</span></span>
-        <span data-en>Guide every student.<br><span class="teal-word">At scale.</span></span>
+        <span data-fr>Accompagnez chaque étudiant.<br><span class="brand-word">À grande échelle.</span></span>
+        <span data-en>Guide every student.<br><span class="brand-word">At scale.</span></span>
       </h1>
       <p class="lead">
         <span data-fr>CareerON donne à vos équipes carrières un système IA complet : coaching contextualisé, analyse de CV, et pilotage consultant. Plus de personnalisation, sans plus de ressources.</span>
         <span data-en>CareerON gives your career teams a complete AI system: contextualized coaching, resume analysis, and consultant dashboards. More personalization, without more headcount.</span>
       </p>
       <div class="hero-ctas">
-        <a href="#contact" class="btn-primary">
+        <a href="https://cal.com/hadi-hijazi-bloq-ai/careeron-intro" target="_blank" rel="noopener" class="btn-primary">
           <span data-fr>Réserver une démo</span><span data-en>Book a Demo</span>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
         <a href="#solution" class="btn-ghost">
           <span data-fr>Voir comment ça marche</span><span data-en>See how it works</span>
         </a>
-        <a href="calculator.html" class="btn-ghost" style="border-color:rgba(0,224,208,0.25);color:rgba(0,224,208,0.75);gap:7px;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
-          <span data-fr>Calculer vos pertes</span><span data-en>Calculate your losses</span>
-        </a>
       </div>
+      <a href="calculator.html" class="hero-quiet-link">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg>
+        <span data-fr>Calculez ce que vos services carrière perdent chaque année</span>
+        <span data-en>Calculate what your career services lose each year</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
     </div>
 
     <!-- Hero cards row -->
@@ -747,20 +1004,20 @@
       <div class="hero-card">
         <div class="hero-card-label">Career Identity Statement</div>
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-          <div style="width:32px;height:32px;border-radius:8px;background:var(--teal-dim);display:flex;align-items:center;justify-content:center;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          <div style="width:32px;height:32px;border-radius:8px;background:var(--purple-dim);display:flex;align-items:center;justify-content:center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
           </div>
           <div>
             <div style="font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.8);">Strategy Consulting</div>
             <div style="font-size:0.65rem;color:rgba(255,255,255,0.35);">Auto-generated</div>
           </div>
         </div>
-        <div style="font-size:0.75rem;line-height:1.6;color:rgba(255,255,255,0.5);font-style:italic;border-left:2px solid var(--teal);padding-left:12px;">
+        <div style="font-size:0.75rem;line-height:1.6;color:rgba(255,255,255,0.5);font-style:italic;border-left:2px solid var(--purple);padding-left:12px;">
           <span data-fr>&laquo; Diplômée d'un MSc Finance avec une expérience en audit chez Deloitte, je combine rigueur analytique et vision stratégique pour accompagner les transformations... &raquo;</span>
           <span data-en>&laquo; With an MSc in Finance and audit experience at Deloitte, I combine analytical rigor with strategic vision to drive transformations... &raquo;</span>
         </div>
         <div style="display:flex;align-items:center;gap:6px;margin-top:10px;">
-          <div style="width:6px;height:6px;border-radius:50%;background:#10B981;"></div>
+          <div style="width:6px;height:6px;border-radius:50%;background:#00C7A7;"></div>
           <span style="font-size:0.68rem;color:rgba(255,255,255,0.4);"><span data-fr>Confiance élevée</span><span data-en>High confidence</span></span>
         </div>
       </div>
@@ -768,13 +1025,33 @@
   </div>
 </section>
 
-<!-- TRUST -->
+<!-- BRAND PILLARS -->
 <div class="trust-strip">
   <div class="container">
-    <div class="trust-inner">
-      <div class="trust-label">
-        <span data-fr>Conçu pour les universités et grandes écoles qui veulent mieux accompagner leurs étudiants</span>
-        <span data-en>Built for universities and business schools who want to better support their students</span>
+    <div class="pillars-line">
+      <div class="pillar-line-item">
+        <div class="pillar-diamond"></div>
+        <div class="pillar-line-name"><span data-fr>Intelligent</span><span data-en>Intelligent</span></div>
+        <div class="pillar-line-desc">
+          <span data-fr>Précision IA, données validées, contexte par parcours.</span>
+          <span data-en>AI precision, validated data, context by track.</span>
+        </div>
+      </div>
+      <div class="pillar-line-item">
+        <div class="pillar-diamond"></div>
+        <div class="pillar-line-name"><span data-fr>Humain</span><span data-en>Human</span></div>
+        <div class="pillar-line-desc">
+          <span data-fr>L'IA augmente vos consultants, sans jamais les remplacer.</span>
+          <span data-en>AI augments your advisors — it never replaces them.</span>
+        </div>
+      </div>
+      <div class="pillar-line-item">
+        <div class="pillar-diamond"></div>
+        <div class="pillar-line-name"><span data-fr>Connecté</span><span data-en>Connected</span></div>
+        <div class="pillar-line-desc">
+          <span data-fr>Étudiants, équipes carrière, employeurs — un seul système.</span>
+          <span data-en>Students, career teams, employers — one system.</span>
+        </div>
       </div>
     </div>
   </div>
@@ -926,10 +1203,10 @@
         </div>
         <div class="bento-visual">
           <div class="mock-tracks">
-            <div class="mock-track"><div class="mock-dot" style="background:var(--teal)"></div><div class="mock-track-name">Strategy Consulting</div><div class="mock-track-count">12 sources</div></div>
-            <div class="mock-track"><div class="mock-dot" style="background:#F59E0B"></div><div class="mock-track-name">Investment Banking</div><div class="mock-track-count">8 sources</div></div>
-            <div class="mock-track"><div class="mock-dot" style="background:#8B5CF6"></div><div class="mock-track-name">Tech & Product</div><div class="mock-track-count">15 sources</div></div>
-            <div class="mock-track"><div class="mock-dot" style="background:#EC4899"></div><div class="mock-track-name">Entrepreneurship</div><div class="mock-track-count">6 sources</div></div>
+            <div class="mock-track"><div class="mock-dot" style="background:var(--purple)"></div><div class="mock-track-name">Strategy Consulting</div><div class="mock-track-count">12 sources</div></div>
+            <div class="mock-track"><div class="mock-dot" style="background:var(--blue)"></div><div class="mock-track-name">Investment Banking</div><div class="mock-track-count">8 sources</div></div>
+            <div class="mock-track"><div class="mock-dot" style="background:var(--success)"></div><div class="mock-track-name">Tech & Product</div><div class="mock-track-count">15 sources</div></div>
+            <div class="mock-track"><div class="mock-dot" style="background:#F59E0B"></div><div class="mock-track-name">Entrepreneurship</div><div class="mock-track-count">6 sources</div></div>
           </div>
         </div>
       </div>
@@ -968,10 +1245,10 @@
         </div>
         <div class="bento-visual">
           <div class="mock-kpis">
-            <div class="mock-kpi"><div class="mock-kpi-num" style="color:var(--teal)">248</div><div class="mock-kpi-label"><span data-fr>Étudiants</span><span data-en>Students</span></div></div>
-            <div class="mock-kpi"><div class="mock-kpi-num" style="color:#10B981">73%</div><div class="mock-kpi-label"><span data-fr>Actifs</span><span data-en>Active</span></div></div>
-            <div class="mock-kpi"><div class="mock-kpi-num" style="color:#F59E0B">142</div><div class="mock-kpi-label">CIS</div></div>
-            <div class="mock-kpi"><div class="mock-kpi-num" style="color:#8B5CF6">89</div><div class="mock-kpi-label">CVs</div></div>
+            <div class="mock-kpi"><div class="mock-kpi-num" style="color:var(--purple)">248</div><div class="mock-kpi-label"><span data-fr>Étudiants</span><span data-en>Students</span></div></div>
+            <div class="mock-kpi"><div class="mock-kpi-num" style="color:#00C7A7">73%</div><div class="mock-kpi-label"><span data-fr>Actifs</span><span data-en>Active</span></div></div>
+            <div class="mock-kpi"><div class="mock-kpi-num" style="color:var(--blue)">142</div><div class="mock-kpi-label">CIS</div></div>
+            <div class="mock-kpi"><div class="mock-kpi-num" style="color:#F59E0B">89</div><div class="mock-kpi-label">CVs</div></div>
           </div>
         </div>
       </div>
@@ -1073,6 +1350,126 @@
   </div>
 </section>
 
+<!-- EMBEDDED CALCULATOR -->
+<section class="embed-calc" id="calculator">
+  <div class="container">
+    <div class="embed-calc-header reveal">
+      <span class="eyebrow">
+        <span data-fr>Diagnostic rapide</span><span data-en>Quick diagnostic</span>
+      </span>
+      <h2>
+        <span data-fr>Combien vos services carrière<br>perdent chaque année ?</span>
+        <span data-en>How much your career services<br>lose each year</span>
+      </h2>
+      <p class="lead" style="margin: 16px auto 0; text-align: center;">
+        <span data-fr>Quelques chiffres. Un coût annuel concret. Mis à jour en direct.</span>
+        <span data-en>A few numbers. A concrete annual cost. Updated live.</span>
+      </p>
+    </div>
+
+    <div class="embed-calc-card reveal reveal-delay-1">
+      <div class="embed-calc-grid">
+
+        <div class="embed-calc-inputs">
+          <div class="embed-calc-section-label">
+            <span data-fr>Vos chiffres</span><span data-en>Your numbers</span>
+          </div>
+
+          <div class="embed-field">
+            <label class="embed-field-label" for="ec_students">
+              <span><span data-fr>Étudiants inscrits</span><span data-en>Enrolled students</span></span>
+              <span class="hint" data-fr>actifs</span><span class="hint" data-en>active</span>
+            </label>
+            <div class="embed-input-wrap">
+              <input class="embed-input" type="number" id="ec_students" value="2000" min="100" max="50000" inputmode="numeric">
+            </div>
+          </div>
+
+          <div class="embed-field">
+            <label class="embed-field-label" for="ec_consultants">
+              <span><span data-fr>Équipe carrière</span><span data-en>Career services staff</span></span>
+              <span class="hint">FTE</span>
+            </label>
+            <div class="embed-input-wrap">
+              <input class="embed-input" type="number" id="ec_consultants" value="4" min="1" max="100" inputmode="numeric">
+            </div>
+          </div>
+
+          <div class="embed-field">
+            <label class="embed-field-label" for="ec_salary">
+              <span><span data-fr>Salaire moyen consultant</span><span data-en>Avg. consultant salary</span></span>
+              <span class="hint">€/yr</span>
+            </label>
+            <div class="embed-input-wrap">
+              <input class="embed-input" type="number" id="ec_salary" value="45000" min="20000" max="200000" step="1000" inputmode="numeric">
+              <span class="embed-suffix">€</span>
+            </div>
+          </div>
+
+          <div class="embed-field" style="margin-bottom: 0;">
+            <label class="embed-field-label" for="ec_hours">
+              <span><span data-fr>Heures manuelles / semaine</span><span data-en>Manual hours per week</span></span>
+              <span class="hint" data-fr>par consultant</span><span class="hint" data-en>per advisor</span>
+            </label>
+            <div class="embed-slider-row">
+              <input type="range" class="embed-slider" id="ec_hours" min="4" max="40" value="23">
+              <span class="embed-slider-value" id="ec_hours_val">23h</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="embed-calc-result">
+          <div class="embed-result-inner">
+            <div class="embed-result-label">
+              <span data-fr>Coût annuel de l'inefficacité</span>
+              <span data-en>Annual cost of inefficiency</span>
+            </div>
+            <div class="embed-result-big" id="ec_cost">€109K</div>
+            <div class="embed-result-sub">
+              <span id="ec_hours_total">4,232</span>
+              <span data-fr> heures brûlées sur des tâches automatisables</span>
+              <span data-en> hours burned on automatable tasks</span>
+            </div>
+
+            <div class="embed-result-meta">
+              <div class="embed-meta-block">
+                <div class="embed-meta-label">
+                  <span data-fr>Avec CareerON</span><span data-en>With CareerON</span>
+                </div>
+                <div class="embed-meta-value success" id="ec_recovered">€76K</div>
+                <div class="embed-meta-label" style="margin-top:2px;color:rgba(255,255,255,0.35);">
+                  <span data-fr>récupérés / an</span><span data-en>recovered / yr</span>
+                </div>
+              </div>
+              <div class="embed-meta-block">
+                <div class="embed-meta-label">
+                  <span data-fr>Heures rendues</span><span data-en>Hours reclaimed</span>
+                </div>
+                <div class="embed-meta-value" id="ec_hours_saved">2,962h</div>
+                <div class="embed-meta-label" style="margin-top:2px;color:rgba(255,255,255,0.35);">
+                  <span data-fr>pour le travail à forte valeur</span><span data-en>for high-value work</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="embed-result-cta">
+              <a href="https://cal.com/hadi-hijazi-bloq-ai/careeron-intro" target="_blank" rel="noopener" class="btn-primary">
+                <span data-fr>Réserver une démo</span><span data-en>Book a demo</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <a href="calculator.html" class="embed-result-link">
+                <span data-fr>Détail complet</span><span data-en>Full breakdown</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section" id="contact">
   <div class="container reveal">
@@ -1088,7 +1485,7 @@
       <span data-en>30 minutes. Your tracks. Our platform. See the difference.</span>
     </p>
     <div class="cta-buttons">
-      <a href="mailto:clement@sporrer.fr?subject=Demo%20CareerON" class="btn-primary">
+      <a href="https://cal.com/hadi-hijazi-bloq-ai/careeron-intro" target="_blank" rel="noopener" class="btn-primary">
         <span data-fr>Réserver une démo</span><span data-en>Book a Demo</span>
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
@@ -1102,7 +1499,11 @@
 <!-- FOOTER -->
 <footer>
   <div class="container">
-    <div class="footer-logo">Career<span>ON</span></div>
+    <div class="footer-logo"><img src="icon.png" class="brand-mark" alt="">Career<span>ON</span></div>
+    <div class="footer-tagline">
+      <span data-fr>Services carrière intelligents. Résultats supérieurs.</span>
+      <span data-en>Smarter career services. Stronger outcomes.</span>
+    </div>
     <small>&copy; 2026 CareerON</small>
   </div>
 </footer>
@@ -1138,6 +1539,70 @@
       if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     });
   });
+
+  // Embedded calculator — live computation
+  (function () {
+    const $students    = document.getElementById('ec_students');
+    const $consultants = document.getElementById('ec_consultants');
+    const $salary      = document.getElementById('ec_salary');
+    const $hours       = document.getElementById('ec_hours');
+    if (!$students) return;
+
+    const $hoursVal     = document.getElementById('ec_hours_val');
+    const $cost         = document.getElementById('ec_cost');
+    const $hoursTotal   = document.getElementById('ec_hours_total');
+    const $recovered    = document.getElementById('ec_recovered');
+    const $hoursSaved   = document.getElementById('ec_hours_saved');
+
+    const fmtMoney = n => {
+      if (n >= 1000000) return '€' + (n / 1000000).toFixed(1) + 'M';
+      if (n >= 1000)    return '€' + Math.round(n / 1000) + 'K';
+      return '€' + Math.round(n);
+    };
+    const fmtNum = n => Math.round(n).toLocaleString('en-US');
+    const fmtHrs = n => {
+      const r = Math.round(n);
+      return r >= 10000 ? Math.round(r / 1000) + 'K h' : r.toLocaleString('en-US') + 'h';
+    };
+
+    function paintSlider(el) {
+      const min = +el.min || 0, max = +el.max || 100, val = +el.value;
+      const pct = ((val - min) / (max - min)) * 100;
+      el.style.background = `linear-gradient(to right, #6C5CE7 0%, #2979FF ${pct}%, #F2F4F7 ${pct}%, #F2F4F7 100%)`;
+    }
+
+    function compute() {
+      const consultants = Math.max(1, +$consultants.value || 1);
+      const salary      = Math.max(20000, +$salary.value || 45000);
+      const hoursWeek   = Math.max(1, +$hours.value || 20);
+
+      const workingWeeks = 46;
+      const weeklyHours  = 38;
+      const automationRate = 0.70;
+
+      const annualManualHours = hoursWeek * workingWeeks * consultants;
+      const hourlyRate        = salary / (workingWeeks * weeklyHours);
+      const costOfWaste       = annualManualHours * hourlyRate;
+      const hoursSaved        = annualManualHours * automationRate;
+      const costSaved         = costOfWaste * automationRate;
+
+      $cost.textContent       = fmtMoney(costOfWaste);
+      $hoursTotal.textContent = fmtNum(annualManualHours);
+      $recovered.textContent  = fmtMoney(costSaved);
+      $hoursSaved.textContent = fmtHrs(hoursSaved);
+      $hoursVal.textContent   = hoursWeek + 'h';
+    }
+
+    [$students, $consultants, $salary, $hours].forEach(el => {
+      el.addEventListener('input', () => {
+        if (el === $hours) paintSlider(el);
+        compute();
+      });
+    });
+
+    paintSlider($hours);
+    compute();
+  })();
 </script>
 </body>
 </html>
