@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CareerON — Le système opérationnel des services carrière</title>
+  <title>CareerON : Le système opérationnel des services carrière</title>
   <meta name="description" content="CareerON automatise le back-office des services carrière, centralise les données étudiants et aide vos équipes à piloter l'accompagnement, les cohortes et les placements.">
   <link rel="icon" type="image/png" href="public/favicon.png">
   <link rel="apple-touch-icon" href="public/favicon.png">
-  <meta property="og:title" content="CareerON — Le système opérationnel des services carrière">
+  <meta property="og:title" content="CareerON : Le système opérationnel des services carrière">
   <meta property="og:description" content="Accompagnez plus d'étudiants. Sans recruter plus.">
   <meta property="og:image" content="logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1039,10 +1039,10 @@
       position: absolute; inset: 0; z-index: 1;
       background: linear-gradient(
         180deg,
-        rgba(11,19,43,0.62) 0%,
-        rgba(11,19,43,0.18) 30%,
-        rgba(11,19,43,0.22) 65%,
-        rgba(11,19,43,0.80) 100%
+        rgba(11,19,43,0.82) 0%,
+        rgba(11,19,43,0.55) 30%,
+        rgba(11,19,43,0.60) 65%,
+        rgba(11,19,43,0.92) 100%
       );
     }
     .hero-aurora { display: none !important; }
@@ -1376,6 +1376,133 @@
     }
     .hero .container { padding-bottom: 0 !important; }
 
+    /* --- OUTCOMES --- */
+    .outcomes { padding: 120px 0; background: var(--white); }
+    .outcomes-header { text-align: center; max-width: 580px; margin: 0 auto 64px; }
+    .outcomes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .outcome-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px 28px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .outcome-card:hover { border-color: rgba(108,92,231,0.2); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.05); }
+    .outcome-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--purple-dim); display: flex;
+      align-items: center; justify-content: center; margin-bottom: 20px;
+    }
+    .outcome-icon svg { width: 20px; height: 20px; stroke: var(--purple); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .outcome-card h3 { font-size: 1.05rem; margin-bottom: 8px; }
+    .outcome-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+    .outcomes-anchor {
+      margin-top: 56px; text-align: center;
+      padding: 48px 40px; background: var(--navy); border-radius: 24px;
+      position: relative; overflow: hidden;
+    }
+    .outcomes-anchor::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(108,92,231,0.25) 0%, transparent 60%);
+    }
+    .outcomes-anchor-inner { position: relative; z-index: 1; }
+    .outcomes-anchor-num {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 5rem); font-weight: 800;
+      letter-spacing: -0.05em; line-height: 1;
+      background: var(--gradient);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .outcomes-anchor-label { font-size: 1.05rem; color: rgba(255,255,255,0.7); margin-top: 8px; }
+    .outcomes-anchor-sub { font-size: 0.82rem; color: rgba(255,255,255,0.35); margin-top: 4px; }
+
+    /* --- ROI --- */
+    .roi-section { padding: 80px 0 120px; background: var(--white); }
+    .roi-card {
+      max-width: 880px; margin: 0 auto;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 24px; padding: 48px 56px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+    }
+    .roi-equation { display: flex; flex-direction: column; gap: 12px; }
+    .roi-line { display: flex; align-items: center; gap: 12px; }
+    .roi-val { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; min-width: 56px; }
+    .roi-op { font-size: 1.1rem; color: var(--text-tertiary); font-weight: 500; width: 20px; text-align: center; }
+    .roi-divider { height: 1px; background: var(--border); margin: 8px 0; }
+    .roi-result-line { display: flex; align-items: baseline; gap: 10px; }
+    .roi-result-num {
+      font-family: var(--font-display); font-size: 2.25rem; font-weight: 700;
+      letter-spacing: -0.04em; line-height: 1;
+      background: var(--gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .roi-result-label { font-size: 0.85rem; color: var(--text-secondary); }
+    .roi-outcome-list { display: flex; flex-direction: column; gap: 16px; }
+    .roi-outcome-item { display: flex; gap: 14px; align-items: flex-start; }
+    .roi-outcome-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--purple); flex-shrink: 0; margin-top: 6px; }
+    .roi-outcome-text { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; }
+    .roi-outcome-text strong { color: var(--text); font-weight: 600; }
+    .roi-note { margin-top: 20px; font-size: 0.75rem; color: var(--text-tertiary); font-style: italic; }
+    @media (max-width: 700px) { .roi-card { grid-template-columns: 1fr; padding: 32px 24px; gap: 32px; } }
+
+    /* --- STAKEHOLDERS --- */
+    .stakeholders-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .stakeholder-featured {
+      grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr;
+      border-radius: 20px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 16px;
+    }
+    .stakeholder-featured-left { background: var(--navy); color: var(--white); padding: 40px 36px; }
+    .stakeholder-featured-left h3 { color: var(--white); font-size: 1.4rem; margin-bottom: 6px; }
+    .stakeholder-featured-sub { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 24px; }
+    .stakeholder-featured-message {
+      font-style: italic; font-size: 0.95rem; line-height: 1.6;
+      color: rgba(255,255,255,0.8);
+      border-left: 3px solid var(--purple); padding-left: 16px; margin-bottom: 28px;
+    }
+    .stakeholder-featured-right { background: var(--surface); padding: 40px 36px; }
+    .stakeholder-featured-right h4 {
+      font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--text-tertiary); margin-bottom: 20px;
+    }
+    .stakeholder-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.78rem; font-weight: 500;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 100px; padding: 5px 14px; color: var(--text); margin: 4px;
+    }
+    .stakeholder-tag svg { stroke: var(--purple); flex-shrink: 0; }
+
+    /* --- DIFFERENTIATION --- */
+    .diff-section {
+      padding: 120px 0; background: var(--navy); color: var(--white);
+      position: relative; overflow: hidden;
+    }
+    .diff-section::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .diff-section .container { position: relative; z-index: 1; }
+    .diff-header { text-align: center; max-width: 640px; margin: 0 auto 64px; }
+    .diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 960px; margin: 0 auto; }
+    .diff-card {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px; padding: 28px 24px; transition: all 0.3s;
+    }
+    .diff-card:hover { border-color: rgba(108,92,231,0.2); background: rgba(255,255,255,0.06); }
+    .diff-cross {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px; font-size: 0.9rem; color: rgba(255,255,255,0.25);
+    }
+    .diff-bad { font-size: 0.78rem; color: rgba(255,255,255,0.28); text-decoration: line-through; margin-bottom: 10px; display: block; }
+    .diff-good { font-size: 0.88rem; font-weight: 500; color: rgba(255,255,255,0.85); line-height: 1.5; }
+    .diff-good .accent { color: #A99BFF; font-weight: 600; }
+
+    @media (max-width: 860px) {
+      .outcomes-grid, .stakeholders-grid, .diff-grid { grid-template-columns: 1fr; }
+      .stakeholder-featured { grid-template-columns: 1fr; }
+    }
+
   </style>
 </head>
 <body>
@@ -1389,14 +1516,14 @@
     </a>
     <div class="nav-links">
       <a href="#solution" class="nav-link"><span data-fr>Solution</span><span data-en>Solution</span></a>
-      <a href="#features" class="nav-link"><span data-fr>Fonctionnalités</span><span data-en>Features</span></a>
-      <a href="#team" class="nav-link"><span data-fr>Équipe</span><span data-en>Team</span></a>
+      <a href="#outcomes" class="nav-link"><span data-fr>Résultats</span><span data-en>Outcomes</span></a>
+      <a href="#audience" class="nav-link"><span data-fr>Pour qui</span><span data-en>For whom</span></a>
       <a href="#calculator" class="nav-link"><span data-fr>Calculateur</span><span data-en>Calculator</span></a>
     </div>
     <div class="nav-actions">
       <button class="lang-btn" onclick="toggleLang()">EN / FR</button>
       <a href="https://cal.com/hadi-hijazi-bloq-ai/careeron-intro" target="_blank" rel="noopener" class="nav-cta">
-        <span data-fr>Réserver une démo</span><span data-en>Book a Demo</span>
+        <span data-fr>Montrez-moi</span><span data-en>Show me</span>
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
       <button class="mobile-toggle" onclick="this.classList.toggle('open')" aria-label="Menu">
@@ -1456,11 +1583,11 @@
         </p>
         <div class="hero-ctas">
           <a href="https://cal.com/hadi-hijazi-bloq-ai/careeron-intro" target="_blank" rel="noopener" class="btn-primary">
-            <span data-fr>Demander une démo</span><span data-en>Book a Demo</span>
+            <span data-fr>Montrez-moi</span><span data-en>Show me</span>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
           <a href="#calculator" class="btn-ghost">
-            <span data-fr>Calculer le temps économisé</span><span data-en>Calculate time saved</span>
+            <span data-fr>Calculer mon ROI</span><span data-en>Calculate my ROI</span>
           </a>
         </div>
       </div>
@@ -1500,7 +1627,7 @@
               <div class="dash-dot" style="background:#FFBD2E"></div>
               <div class="dash-dot" style="background:#28C941"></div>
             </div>
-            <div class="dash-title">CareerON — Career Services Console</div>
+            <div class="dash-title">CareerON, Career Services Console</div>
             <div style="width:52px"></div>
           </div>
           <!-- Body -->
@@ -1546,8 +1673,8 @@
                 </div>
                 <div class="dash-kpi">
                   <div class="dash-kpi-num">94%</div>
-                  <div class="dash-kpi-label"><span data-fr>Taux placement</span><span data-en>Placement rate</span></div>
-                  <div class="dash-kpi-delta">↑ vs 71% avant</div>
+                  <div class="dash-kpi-label"><span data-fr>Satisfaction étudiante</span><span data-en>Student satisfaction</span></div>
+                  <div class="dash-kpi-delta">↑ vs 76% avant</div>
                 </div>
                 <div class="dash-kpi">
                   <div class="dash-kpi-num clr-green">+47</div>
@@ -1646,26 +1773,26 @@
     <div class="pillars-line">
       <div class="pillar-line-item">
         <div class="pillar-diamond"></div>
-        <div class="pillar-line-name"><span data-fr>Intelligent</span><span data-en>Intelligent</span></div>
+        <div class="pillar-line-name"><span data-fr>Moins d'admin</span><span data-en>Less admin</span></div>
         <div class="pillar-line-desc">
-          <span data-fr>Précision IA, données validées, contexte par parcours.</span>
-          <span data-en>AI precision, validated data, context by track.</span>
+          <span data-fr>Préparation, notes, synthèses, relances et reporting automatisés.</span>
+          <span data-en>Prep, notes, summaries, follow-ups and reporting automated.</span>
         </div>
       </div>
       <div class="pillar-line-item">
         <div class="pillar-diamond"></div>
-        <div class="pillar-line-name"><span data-fr>Humain</span><span data-en>Human</span></div>
+        <div class="pillar-line-name"><span data-fr>Plus de suivi</span><span data-en>More follow-through</span></div>
         <div class="pillar-line-desc">
-          <span data-fr>L'IA augmente vos consultants, sans jamais les remplacer.</span>
-          <span data-en>AI augments your advisors — it never replaces them.</span>
+          <span data-fr>Chaque étudiant avance entre deux rendez-vous avec des actions claires.</span>
+          <span data-en>Every student progresses between meetings with clear actions.</span>
         </div>
       </div>
       <div class="pillar-line-item">
         <div class="pillar-diamond"></div>
-        <div class="pillar-line-name"><span data-fr>Connecté</span><span data-en>Connected</span></div>
+        <div class="pillar-line-name"><span data-fr>Plus de pilotage</span><span data-en>Better oversight</span></div>
         <div class="pillar-line-desc">
-          <span data-fr>Étudiants, équipes carrière, employeurs — un seul système.</span>
-          <span data-en>Students, career teams, employers — one system.</span>
+          <span data-fr>Vision consolidée par étudiant, cohorte, programme, conseiller et placement.</span>
+          <span data-en>Consolidated view by student, cohort, program, advisor, and placement.</span>
         </div>
       </div>
     </div>
@@ -1678,43 +1805,48 @@
     <div class="problem-layout">
       <div class="problem-left reveal">
         <span class="eyebrow">
-          <span data-fr>Le paradoxe</span>
-          <span data-en>The Paradox</span>
+          <span data-fr>Le problème</span>
+          <span data-en>The Problem</span>
         </span>
         <h2>
-          <span data-fr>Vos étudiants ont mille outils.<br>Mais personne pour trancher.</span>
-          <span data-en>Your students have a thousand tools.<br>But no one to decide for them.</span>
+          <span data-fr>Vos équipes carrière<br>sont sous pression.<br>Vos outils ne suivent pas.</span>
+          <span data-en>Your career teams<br>are under pressure.<br>Your tools don't keep up.</span>
         </h2>
         <div class="problem-quote">
           <span data-fr>&laquo; On veut personnaliser, mais on n'a pas les moyens humains de le faire à grande échelle. &raquo;</span>
-          <span data-en>&laquo; We want to personalize, but we don't have the human resources to do it at scale. &raquo;</span>
+          <span data-en>&laquo; We want to personalize, but we don't have the human capacity to do it at scale. &raquo;</span>
         </div>
         <p class="lead" style="margin-top: 24px;">
-          <span data-fr>Les étudiants utilisent ChatGPT, Perplexity, Teal. Ils arrivent plus outillés. Mais pas plus guidés. Ils attendent de vous d'être des architectes de parcours.</span>
-          <span data-en>Students use ChatGPT, Perplexity, Teal. They arrive more equipped. But not better guided. They expect you to be career architects.</span>
+          <span data-fr>Les promotions grossissent. Les attentes sur l'employabilité montent. Pourtant les équipes carrière ne grandissent pas au même rythme, et elles passent trop de temps sur des tâches qui ne créent pas de valeur de coaching.</span>
+          <span data-en>Cohorts grow. Employability expectations rise. Yet career teams don't grow at the same pace, and they spend too much time on tasks that create no real coaching value.</span>
         </p>
       </div>
       <div class="reveal reveal-delay-1">
         <div class="stat-stack">
           <div class="stat-block">
-            <div class="stat-number">94%</div>
-            <div class="stat-label"><span data-fr>concernés par la désinformation IA</span><span data-en>concerned about AI misinformation</span></div>
+            <div class="stat-number">15–20</div>
+            <div class="stat-label"><span data-fr>minutes perdues en back-office par rendez-vous (préparation + synthèse + suivi)</span><span data-en>minutes lost to back-office per meeting (prep + summary + follow-up)</span></div>
           </div>
           <div class="stat-block">
-            <div class="stat-number">52%</div>
-            <div class="stat-label"><span data-fr>niveau IA basique</span><span data-en>basic AI proficiency</span></div>
+            <div class="stat-number">30–40%</div>
+            <div class="stat-label"><span data-fr>du temps conseiller absorbé par des tâches administratives à faible valeur ajoutée</span><span data-en>of advisor time absorbed by low-value administrative tasks</span></div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-number">9+</div>
+            <div class="stat-label"><span data-fr>silos où vivent les données carrière : Excel, LMS, job board, email, notes personnelles…</span><span data-en>data silos where career data lives: Excel, LMS, job board, email, personal notes…</span></div>
           </div>
           <div class="stat-block">
             <div class="stat-number">#1</div>
-            <div class="stat-label"><span data-fr>obstacle : le manque de temps</span><span data-en>obstacle: lack of time</span></div>
+            <div class="stat-label"><span data-fr>obstacle au coaching de qualité : la charge administrative sur les équipes carrière</span><span data-en>obstacle to quality coaching: the administrative burden on career teams</span></div>
           </div>
-          <div class="stat-block">
-            <div class="stat-number">88%</div>
-            <div class="stat-label"><span data-fr>inquiets des biais outils</span><span data-en>worried about tool bias</span></div>
-          </div>
-          <div class="stat-source">Source: AI & Careers Education — AHECS, Jan 2025</div>
         </div>
       </div>
+    </div>
+    <div style="text-align:center;margin-top:48px;" class="reveal">
+      <a href="#solution" class="btn-outline-light" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:12px;font-size:0.88rem;font-weight:600;text-decoration:none;">
+        <span data-fr>Je veux voir ça</span><span data-en>I want to see this</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
     </div>
   </div>
 </section>
@@ -1722,72 +1854,84 @@
 <!-- PILLARS -->
 <section class="pillars" id="solution">
   <div class="container">
-    <div class="pillars-header reveal">
+    <div class="pillars-header reveal" style="max-width:none;text-align:center;">
       <span class="eyebrow">
-        <span data-fr>Notre approche</span>
-        <span data-en>Our Approach</span>
+        <span data-fr>La solution</span>
+        <span data-en>The Solution</span>
       </span>
       <h2>
-        <span data-fr>Trois piliers.<br>Un seul système.</span>
-        <span data-en>Three pillars.<br>One system.</span>
+        <span data-fr>Un OS IA pour structurer<br>tout le parcours carrière.</span>
+        <span data-en>An AI OS to structure<br>the entire career journey.</span>
       </h2>
-      <p class="lead" style="margin: 16px auto 0; text-align: center;">
-        <span data-fr>De la logique d'outils dispersés vers un système intégré de pilotage carrière.</span>
-        <span data-en>From scattered tools to an integrated career guidance system.</span>
+      <p class="lead" style="margin: 16px 0 0; max-width: none;">
+        <span data-fr>CareerON structure le parcours de bout en bout : accompagnement étudiant, pilotage des cohortes, automatisation du back-office, relations entreprise.</span>
+        <span data-en>CareerON structures the journey end-to-end: student coaching, cohort management, back-office automation, employer relations.</span>
       </p>
     </div>
     <div class="pillars-grid">
       <div class="pillar reveal">
         <div class="pillar-number">01</div>
         <div class="pillar-icon">
-          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
-        <h3>Knowledge & Context</h3>
+        <h3>
+          <span data-fr>Coaching & accompagnement</span>
+          <span data-en>Coaching & support</span>
+        </h3>
         <p>
-          <span data-fr>Un wiki vivant par secteur et marché. Contenu validé, pas des résultats génériques.</span>
-          <span data-en>A living wiki by sector and market. Validated content, not generic results.</span>
+          <span data-fr>L'étudiant avance entre deux rendez-vous. Le service ne dépend plus seulement du face-à-face.</span>
+          <span data-en>Students progress between meetings. The service no longer depends solely on face-to-face time.</span>
         </p>
         <ul class="pillar-list">
-          <li><span data-fr>Parcours par secteur</span><span data-en>Track-based paths</span></li>
-          <li><span data-fr>Ressources contextualisées</span><span data-en>Contextualized resources</span></li>
-          <li><span data-fr>Recherche sémantique</span><span data-en>Semantic search</span></li>
+          <li><span data-fr>Coaching IA disponible 24/7</span><span data-en>AI coaching available 24/7</span></li>
+          <li><span data-fr>Analyse de CV et candidatures</span><span data-en>CV and application analysis</span></li>
+          <li><span data-fr>Plans d'action clairs post-RDV</span><span data-en>Clear post-meeting action plans</span></li>
         </ul>
       </div>
       <div class="pillar reveal reveal-delay-1">
         <div class="pillar-number">02</div>
         <div class="pillar-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
         </div>
-        <h3>AI Guide & Workflows</h3>
+        <h3>
+          <span data-fr>Dashboard & pilotage</span>
+          <span data-en>Dashboard & oversight</span>
+        </h3>
         <p>
-          <span data-fr>Coaching IA qui connaît le contexte, le profil et les attentes du marché.</span>
-          <span data-en>AI coaching that knows the context, the profile, and market expectations.</span>
+          <span data-fr>Le directeur pilote enfin avec des données. Le conseiller prépare ses RDV en quelques secondes.</span>
+          <span data-en>The director finally manages with data. Advisors prep meetings in seconds.</span>
         </p>
         <ul class="pillar-list">
-          <li><span data-fr>Coaching conversationnel</span><span data-en>Conversational coaching</span></li>
-          <li><span data-fr>Analyse de CV</span><span data-en>Resume analysis</span></li>
-          <li><span data-fr>Career Identity Statement</span><span data-en>Career Identity Statement</span></li>
+          <li><span data-fr>Vision par étudiant, cohorte, programme</span><span data-en>View by student, cohort, program</span></li>
+          <li><span data-fr>Alertes étudiants à risque</span><span data-en>At-risk student alerts</span></li>
+          <li><span data-fr>Suivi des placements en temps réel</span><span data-en>Real-time placement tracking</span></li>
         </ul>
       </div>
       <div class="pillar reveal reveal-delay-2">
         <div class="pillar-number">03</div>
         <div class="pillar-icon">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
         </div>
         <h3>
-          <span data-fr>CRM Augmenté</span>
-          <span data-en>Augmented CRM</span>
+          <span data-fr>Automatisation back-office</span>
+          <span data-en>Back-office automation</span>
         </h3>
         <p>
-          <span data-fr>Cockpit consultant avec vision consolidée : historique, alertes, plans d'action.</span>
-          <span data-en>Consultant cockpit with consolidated view: history, alerts, action plans.</span>
+          <span data-fr>Tout ce qui prend du temps sans créer de valeur coaching : automatisé. Le conseiller reste coach, pas secrétaire.</span>
+          <span data-en>Everything that takes time without coaching value: automated. Advisors stay coaches, not clerks.</span>
         </p>
         <ul class="pillar-list">
-          <li><span data-fr>Dashboard temps réel</span><span data-en>Real-time dashboard</span></li>
-          <li><span data-fr>Alertes prioritaires</span><span data-en>Priority alerts</span></li>
-          <li><span data-fr>Métriques d'engagement</span><span data-en>Engagement metrics</span></li>
+          <li><span data-fr>Synthèses post-RDV automatiques</span><span data-en>Automatic post-meeting summaries</span></li>
+          <li><span data-fr>Relances et suivi des actions étudiantes</span><span data-en>Student action follow-ups</span></li>
+          <li><span data-fr>Reporting consolidé sans Excel</span><span data-en>Consolidated reporting without Excel</span></li>
         </ul>
       </div>
+    </div>
+    <div style="text-align:center;margin-top:56px;" class="reveal">
+      <a href="https://cal.com/hadi-hijazi-bloq-ai/careeron-intro" target="_blank" rel="noopener" class="btn-primary">
+        <span data-fr>Montrez-moi</span><span data-en>Show me</span>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
     </div>
   </div>
 </section>
@@ -1797,8 +1941,8 @@
   <div class="container">
     <div class="features-header reveal">
       <span class="eyebrow">
-        <span data-fr>Fonctionnalités</span>
-        <span data-en>Features</span>
+        <span data-fr>Le produit en détail</span>
+        <span data-en>The product in detail</span>
       </span>
       <h2>
         <span data-fr>Construit pour le terrain</span>
@@ -1807,159 +1951,359 @@
     </div>
     <div class="bento">
 
-      <!-- AI Chat -->
+      <!-- Dashboard conseiller -->
       <div class="bento-card bento-wide reveal">
         <div>
           <div class="bento-tag">
-            <span data-fr>Coaching IA</span><span data-en>AI Coaching</span>
+            <span data-fr>Dashboard conseiller</span><span data-en>Advisor dashboard</span>
           </div>
-          <h3><span data-fr>Chaque parcours a son propre coach</span><span data-en>Every track has its own coach</span></h3>
-          <p><span data-fr>Conversations contextualisées par secteur, avec citation de sources et escalade vers l'humain.</span><span data-en>Sector-contextualized conversations with source citations and human escalation.</span></p>
+          <h3><span data-fr>Préparez un RDV en quelques secondes</span><span data-en>Prep a meeting in seconds</span></h3>
+          <p><span data-fr>Historique étudiant, objectifs, actions passées et signaux de risque : tout en un coup d'œil. Moins de 3 minutes de préparation.</span><span data-en>Student history, goals, past actions, risk signals: all at a glance. Under 3 minutes of prep.</span></p>
         </div>
         <div class="bento-visual">
           <div class="mock-tracks">
-            <div class="mock-track"><div class="mock-dot" style="background:var(--purple)"></div><div class="mock-track-name">Strategy Consulting</div><div class="mock-track-count">12 sources</div></div>
-            <div class="mock-track"><div class="mock-dot" style="background:var(--blue)"></div><div class="mock-track-name">Investment Banking</div><div class="mock-track-count">8 sources</div></div>
-            <div class="mock-track"><div class="mock-dot" style="background:var(--success)"></div><div class="mock-track-name">Tech & Product</div><div class="mock-track-count">15 sources</div></div>
-            <div class="mock-track"><div class="mock-dot" style="background:#F59E0B"></div><div class="mock-track-name">Entrepreneurship</div><div class="mock-track-count">6 sources</div></div>
+            <div class="mock-track">
+              <div class="mock-dot" style="background:var(--success)"></div>
+              <div class="mock-track-name">Sophie Marchand</div>
+              <div class="mock-track-count" style="color:var(--success);background:rgba(0,199,167,0.1)"><span data-fr>RDV dans 2h</span><span data-en>Meeting in 2h</span></div>
+            </div>
+            <div class="mock-track">
+              <div class="mock-dot" style="background:#F59E0B"></div>
+              <div class="mock-track-name">Thomas Klein</div>
+              <div class="mock-track-count" style="color:#F59E0B;background:rgba(245,158,11,0.1)"><span data-fr>3 actions en retard</span><span data-en>3 overdue actions</span></div>
+            </div>
+            <div class="mock-track">
+              <div class="mock-dot" style="background:var(--blue)"></div>
+              <div class="mock-track-name">Amira Larbi</div>
+              <div class="mock-track-count" style="color:var(--success);background:rgba(0,199,167,0.1)"><span data-fr>CV analysé ✓</span><span data-en>CV analysed ✓</span></div>
+            </div>
+            <div class="mock-track">
+              <div class="mock-dot" style="background:rgba(255,255,255,0.15)"></div>
+              <div class="mock-track-name">Lucas Petit</div>
+              <div class="mock-track-count" style="color:#F59E0B;background:rgba(245,158,11,0.1)"><span data-fr>À risque</span><span data-en>At risk</span></div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Resume -->
+      <!-- Synthèse post-RDV -->
       <div class="bento-card bento-narrow reveal reveal-delay-1">
         <div>
           <div class="bento-tag">
-            <span data-fr>Intelligence CV</span><span data-en>Resume Intelligence</span>
+            <span data-fr>Synthèse post-RDV</span><span data-en>Post-meeting summary</span>
           </div>
-          <h3><span data-fr>Scoring et feedback actionnable</span><span data-en>Scoring & actionable feedback</span></h3>
+          <h3><span data-fr>Chaque RDV génère un plan d'action</span><span data-en>Every meeting generates an action plan</span></h3>
         </div>
         <div class="bento-visual">
           <div class="mock-resume">
-            <div class="mock-resume-top">
-              <div class="mock-big-score">78<small>/100</small></div>
-              <div class="mock-target"><strong>Strategy</strong><span data-fr>Parcours cible</span><span data-en>Target track</span></div>
-            </div>
             <div class="mock-bars">
-              <div class="mock-bar-row"><span class="mock-bar-label">Technical</span><div class="mock-bar-track"><div class="mock-bar-fill" style="width:85%"></div></div><span class="mock-bar-val">85%</span></div>
-              <div class="mock-bar-row"><span class="mock-bar-label">Soft Skills</span><div class="mock-bar-track"><div class="mock-bar-fill" style="width:72%"></div></div><span class="mock-bar-val">72%</span></div>
-              <div class="mock-bar-row"><span class="mock-bar-label">Keywords</span><div class="mock-bar-track"><div class="mock-bar-fill" style="width:91%"></div></div><span class="mock-bar-val">91%</span></div>
+              <div class="mock-bar-row">
+                <span class="mock-bar-label"><span data-fr>Notes générées</span><span data-en>Notes generated</span></span>
+                <div class="mock-bar-track"><div class="mock-bar-fill" style="width:100%;background:var(--success)"></div></div>
+                <span class="mock-bar-val" style="color:var(--success)">✓</span>
+              </div>
+              <div class="mock-bar-row">
+                <span class="mock-bar-label"><span data-fr>Actions créées</span><span data-en>Actions created</span></span>
+                <div class="mock-bar-track"><div class="mock-bar-fill" style="width:100%;background:var(--purple)"></div></div>
+                <span class="mock-bar-val">3</span>
+              </div>
+              <div class="mock-bar-row">
+                <span class="mock-bar-label"><span data-fr>Email envoyé</span><span data-en>Email sent</span></span>
+                <div class="mock-bar-track"><div class="mock-bar-fill" style="width:100%;background:var(--success)"></div></div>
+                <span class="mock-bar-val" style="color:var(--success)">✓</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Dashboard -->
+      <!-- Pilotage cohortes -->
       <div class="bento-card bento-narrow reveal">
         <div>
           <div class="bento-tag">
-            <span data-fr>Pilotage</span><span data-en>Dashboard</span>
+            <span data-fr>Pilotage cohortes</span><span data-en>Cohort oversight</span>
           </div>
-          <h3><span data-fr>KPIs en temps réel</span><span data-en>Real-time KPIs</span></h3>
-          <p><span data-fr>Alertes étudiants inactifs, suivi d'engagement, export CSV.</span><span data-en>Inactive student alerts, engagement tracking, CSV export.</span></p>
+          <h3><span data-fr>Vision par programme et promotion</span><span data-en>View by program and cohort</span></h3>
+          <p><span data-fr>Cohortes en retard, alertes précoces, taux d'actions complétées.</span><span data-en>Behind-schedule cohorts, early alerts, task completion rates.</span></p>
         </div>
         <div class="bento-visual">
           <div class="mock-kpis">
-            <div class="mock-kpi"><div class="mock-kpi-num" style="color:var(--purple)">248</div><div class="mock-kpi-label"><span data-fr>Étudiants</span><span data-en>Students</span></div></div>
-            <div class="mock-kpi"><div class="mock-kpi-num" style="color:#00C7A7">73%</div><div class="mock-kpi-label"><span data-fr>Actifs</span><span data-en>Active</span></div></div>
-            <div class="mock-kpi"><div class="mock-kpi-num" style="color:var(--blue)">142</div><div class="mock-kpi-label">CIS</div></div>
-            <div class="mock-kpi"><div class="mock-kpi-num" style="color:#F59E0B">89</div><div class="mock-kpi-label">CVs</div></div>
+            <div class="mock-kpi"><div class="mock-kpi-num" style="color:var(--purple)">847</div><div class="mock-kpi-label"><span data-fr>Étudiants actifs</span><span data-en>Active students</span></div></div>
+            <div class="mock-kpi"><div class="mock-kpi-num" style="color:#F59E0B">14</div><div class="mock-kpi-label"><span data-fr>À risque</span><span data-en>At risk</span></div></div>
+            <div class="mock-kpi"><div class="mock-kpi-num" style="color:#00C7A7">78%</div><div class="mock-kpi-label"><span data-fr>Actions faites</span><span data-en>Actions done</span></div></div>
+            <div class="mock-kpi"><div class="mock-kpi-num" style="color:var(--blue)">+47</div><div class="mock-kpi-label"><span data-fr>Placements / sem.</span><span data-en>Placed / wk</span></div></div>
           </div>
         </div>
       </div>
 
-      <!-- Multilingual -->
+      <!-- Relations entreprise -->
       <div class="bento-card bento-wide reveal reveal-delay-1">
         <div>
           <div class="bento-tag">
-            <span data-fr>Multilingue</span><span data-en>Multilingual</span>
+            <span data-fr>Relations entreprise</span><span data-en>Employer relations</span>
           </div>
-          <h3><span data-fr>8 langues. Support RTL natif.</span><span data-en>8 languages. Native RTL support.</span></h3>
-          <p><span data-fr>CareerON parle la langue de vos étudiants, où qu'ils soient.</span><span data-en>CareerON speaks your students' language, wherever they are.</span></p>
+          <h3><span data-fr>Présentez les bons profils aux bons partenaires</span><span data-en>Match the right profiles to the right partners</span></h3>
+          <p><span data-fr>L'équipe corporate comprend mieux les talents disponibles. Moins d'événements génériques, plus de matching qualifié.</span><span data-en>The corporate team better understands available talent. Fewer generic events, more qualified matching.</span></p>
         </div>
         <div class="bento-visual">
-          <div class="mock-langs">
-            <div class="mock-lang"><span class="flag">&#x1F1EC;&#x1F1E7;</span> English</div>
-            <div class="mock-lang"><span class="flag">&#x1F1EB;&#x1F1F7;</span> Français</div>
-            <div class="mock-lang"><span class="flag">&#x1F1F8;&#x1F1E6;</span> العربية</div>
-            <div class="mock-lang"><span class="flag">&#x1F1E7;&#x1F1F7;</span> Português</div>
-            <div class="mock-lang"><span class="flag">&#x1F1E8;&#x1F1F3;</span> 简体中文</div>
-            <div class="mock-lang"><span class="flag">&#x1F1F9;&#x1F1FC;</span> 繁體中文</div>
-            <div class="mock-lang"><span class="flag">&#x1F1EF;&#x1F1F5;</span> 日本語</div>
-            <div class="mock-lang"><span class="flag">&#x1F1F7;&#x1F1FA;</span> Русский</div>
+          <div class="mock-tracks">
+            <div class="mock-track"><div class="mock-dot" style="background:var(--purple)"></div><div class="mock-track-name">McKinsey & Company</div><div class="mock-track-count">12 <span data-fr>profils ciblés</span><span data-en>targeted profiles</span></div></div>
+            <div class="mock-track"><div class="mock-dot" style="background:var(--blue)"></div><div class="mock-track-name">BNP Paribas CIB</div><div class="mock-track-count">8 <span data-fr>profils ciblés</span><span data-en>targeted profiles</span></div></div>
+            <div class="mock-track"><div class="mock-dot" style="background:var(--success)"></div><div class="mock-track-name">Alan</div><div class="mock-track-count">6 <span data-fr>profils ciblés</span><span data-en>targeted profiles</span></div></div>
+            <div class="mock-track"><div class="mock-dot" style="background:#F59E0B"></div><div class="mock-track-name">L'Oréal</div><div class="mock-track-count">9 <span data-fr>profils ciblés</span><span data-en>targeted profiles</span></div></div>
           </div>
         </div>
       </div>
-
+      <div style="text-align:center;margin-top:40px;" class="reveal">
+        <a href="https://cal.com/hadi-hijazi-bloq-ai/careeron-intro" target="_blank" rel="noopener" class="btn-on-light btn-primary" style="background:var(--text);color:var(--white);display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:12px;font-size:0.9rem;font-weight:600;text-decoration:none;box-shadow:0 1px 2px rgba(0,0,0,0.08);">
+          <span data-fr>Montrez-moi</span><span data-en>Show me</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- AUDIENCE -->
+<!-- OUTCOMES -->
+<section class="outcomes" id="outcomes">
+  <div class="container">
+    <div class="outcomes-header reveal">
+      <span class="eyebrow">
+        <span data-fr>Résultats concrets</span><span data-en>Concrete outcomes</span>
+      </span>
+      <h2>
+        <span data-fr>Plus de capacité.<br>Moins d'admin.<br>Plus de pilotage.</span>
+        <span data-en>More capacity.<br>Less admin.<br>Better oversight.</span>
+      </h2>
+    </div>
+    <div class="outcomes-grid">
+      <div class="outcome-card reveal">
+        <div class="outcome-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+        </div>
+        <h3><span data-fr>Accompagnez plus d'étudiants</span><span data-en>Serve more students</span></h3>
+        <p><span data-fr>Même équipe, capacité augmentée. Le service absorbe la croissance des promotions sans recruter proportionnellement.</span><span data-en>Same team, increased capacity. Service absorbs enrollment growth without proportional hiring.</span></p>
+      </div>
+      <div class="outcome-card reveal reveal-delay-1">
+        <div class="outcome-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3><span data-fr>Récupérez du temps conseiller</span><span data-en>Reclaim advisor time</span></h3>
+        <p><span data-fr>Plusieurs centaines d'heures récupérées par an et par conseiller. Moins de back-office, plus de coaching à valeur ajoutée.</span><span data-en>Hundreds of hours recovered per advisor per year. Less back-office, more high-value coaching.</span></p>
+      </div>
+      <div class="outcome-card reveal reveal-delay-2">
+        <div class="outcome-icon">
+          <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <h3><span data-fr>Chaque RDV produit un résultat</span><span data-en>Every meeting drives action</span></h3>
+        <p><span data-fr>Synthèse auto, plan d'action clair, suivi des tâches. Les rendez-vous ne finissent plus dans un fichier notes.</span><span data-en>Auto summary, clear action plan, task tracking. Meetings no longer disappear into note files.</span></p>
+      </div>
+      <div class="outcome-card reveal">
+        <div class="outcome-icon">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <h3><span data-fr>Repérez les retards tôt</span><span data-en>Spot at-risk students early</span></h3>
+        <p><span data-fr>Alertes cohorte, étudiants inactifs, signaux faibles. Le service agit avant qu'il soit trop tard.</span><span data-en>Cohort alerts, inactive students, early signals. Act before it's too late.</span></p>
+      </div>
+      <div class="outcome-card reveal reveal-delay-1">
+        <div class="outcome-icon">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <h3><span data-fr>Pilotez par cohorte</span><span data-en>Manage by cohort</span></h3>
+        <p><span data-fr>Vision consolidée par étudiant, programme, conseiller et placement. Passez du volume à l'impact.</span><span data-en>Consolidated view by student, program, advisor, and placement. Move from volume to impact.</span></p>
+      </div>
+      <div class="outcome-card reveal reveal-delay-2">
+        <div class="outcome-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3><span data-fr>Ciblez les entreprises</span><span data-en>Target employers precisely</span></h3>
+        <p><span data-fr>Présentez les bons profils aux bons partenaires. Moins de masse, plus de matching qualifié.</span><span data-en>Match the right students to the right employers. Less noise, more qualified matching.</span></p>
+      </div>
+    </div>
+    <div class="outcomes-anchor reveal">
+      <div class="outcomes-anchor-inner">
+        <div class="outcomes-anchor-num">200h</div>
+        <div class="outcomes-anchor-label"><span data-fr>récupérées par conseiller, par an</span><span data-en>recovered per advisor, per year</span></div>
+        <div class="outcomes-anchor-sub"><span data-fr>hypothèse : 15 min économisées × 800 rendez-vous</span><span data-en>assumption: 15 min saved × 800 meetings</span></div>
+        <div style="margin-top:28px;">
+          <a href="#calculator" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;">
+            <span data-fr>Calculer mon ROI</span><span data-en>Calculate my ROI</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI -->
+<section class="roi-section" id="roi">
+  <div class="container">
+    <div class="roi-card reveal">
+      <div class="roi-equation">
+        <div class="roi-line">
+          <span class="roi-val">15 min</span>
+          <span style="font-size:0.82rem;color:var(--text-secondary)"><span data-fr>économisées par rendez-vous</span><span data-en>saved per meeting</span></span>
+        </div>
+        <div class="roi-line">
+          <span class="roi-op">×</span>
+          <span class="roi-val">800</span>
+          <span style="font-size:0.82rem;color:var(--text-secondary)"><span data-fr>rendez-vous par an / conseiller</span><span data-en>meetings per year / advisor</span></span>
+        </div>
+        <div class="roi-line">
+          <span class="roi-op">×</span>
+          <span class="roi-val">10</span>
+          <span style="font-size:0.82rem;color:var(--text-secondary)"><span data-fr>conseillers</span><span data-en>advisors</span></span>
+        </div>
+        <div class="roi-divider"></div>
+        <div class="roi-result-line">
+          <span class="roi-result-num">2 000h</span>
+          <span class="roi-result-label"><span data-fr>récupérées par an</span><span data-en>recovered per year</span></span>
+        </div>
+        <div class="roi-result-line" style="margin-top:8px;">
+          <span class="roi-result-num" style="font-size:1.6rem;">≈ 57k€</span>
+          <span class="roi-result-label"><span data-fr>de capacité opérationnelle retrouvée</span><span data-en>of operational capacity recovered</span></span>
+        </div>
+        <p class="roi-note"><span data-fr>Base : coût employeur consultant 50k€/an, soit 1,14 ETP récupéré.</span><span data-en>Basis: advisor employer cost 50k€/year, i.e. 1.14 FTE recovered.</span></p>
+        <div style="margin-top:24px;">
+          <a href="https://cal.com/hadi-hijazi-bloq-ai/careeron-intro" target="_blank" rel="noopener" class="btn-on-light btn-primary" style="background:var(--text);color:var(--white);display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:12px;font-size:0.88rem;font-weight:600;text-decoration:none;">
+            <span data-fr>Montrez-moi</span><span data-en>Show me</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow"><span data-fr>ROI direct</span><span data-en>Direct ROI</span></span>
+        <h2 style="font-size:clamp(1.5rem,2.8vw,2rem);margin-bottom:24px;line-height:1.2;"><span data-fr>Le temps récupéré finance une partie du coût.</span><span data-en>Time saved funds part of the cost.</span></h2>
+        <div class="roi-outcome-list">
+          <div class="roi-outcome-item">
+            <div class="roi-outcome-dot"></div>
+            <p class="roi-outcome-text"><strong><span data-fr>Moins d'admin</span><span data-en>Less admin</span></strong> : <span data-fr>préparation, notes, synthèses, relances automatisées</span><span data-en>prep, notes, summaries, follow-ups automated</span></p>
+          </div>
+          <div class="roi-outcome-item">
+            <div class="roi-outcome-dot"></div>
+            <p class="roi-outcome-text"><strong><span data-fr>Pas de recrutement immédiat</span><span data-en>No immediate hiring</span></strong> : <span data-fr>le service scale sans embaucher proportionnellement</span><span data-en>service scales without proportional headcount</span></p>
+          </div>
+          <div class="roi-outcome-item">
+            <div class="roi-outcome-dot"></div>
+            <p class="roi-outcome-text"><strong><span data-fr>Défense budgétaire facilitée</span><span data-en>Easier budget defense</span></strong> : <span data-fr>des données pour prouver l'impact auprès de la direction</span><span data-en>data to prove impact to leadership</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROI relations entreprise -->
+    <div class="roi-card reveal" style="margin-top:16px;background:var(--navy);color:var(--white);border-color:rgba(255,255,255,0.07);">
+      <div>
+        <span class="eyebrow" style="color:rgba(168,155,255,0.85)"><span data-fr>Relations entreprise</span><span data-en>Employer relations</span></span>
+        <h2 style="font-size:clamp(1.5rem,2.8vw,2rem);margin-bottom:8px;line-height:1.2;color:var(--white);"><span data-fr>Vous ne vendez plus un accès à l'école.<br>Vous vendez un accès ciblé aux bons profils.</span><span data-en>You're no longer selling access to the school.<br>You're selling targeted access to the right profiles.</span></h2>
+        <p style="font-size:0.88rem;color:rgba(255,255,255,0.45);margin-bottom:28px;"><span data-fr>CareerON donne à l'équipe corporate une vision claire des talents disponibles : leurs compétences, secteurs d'intérêt, ambitions, niveau de préparation.</span><span data-en>CareerON gives the corporate team a clear view of available talent: skills, sector interests, ambitions, readiness level.</span></p>
+        <div class="roi-outcome-list">
+          <div class="roi-outcome-item">
+            <div class="roi-outcome-dot" style="background:rgba(168,155,255,0.7)"></div>
+            <p class="roi-outcome-text" style="color:rgba(255,255,255,0.65)"><strong style="color:var(--white)"><span data-fr>Matching plus qualifié</span><span data-en>Better matching</span></strong> : <span data-fr>les bons profils aux bons partenaires, pas des candidatures en masse</span><span data-en>right profiles to the right partners, not mass applications</span></p>
+          </div>
+          <div class="roi-outcome-item">
+            <div class="roi-outcome-dot" style="background:rgba(168,155,255,0.7)"></div>
+            <p class="roi-outcome-text" style="color:rgba(255,255,255,0.65)"><strong style="color:var(--white)"><span data-fr>Événements plus pertinents</span><span data-en>More relevant events</span></strong> : <span data-fr>ciblage par secteur, compétences, ambitions ; moins de bruit, plus de conversion</span><span data-en>targeting by sector, skills, ambitions; less noise, more conversion</span></p>
+          </div>
+          <div class="roi-outcome-item">
+            <div class="roi-outcome-dot" style="background:rgba(168,155,255,0.7)"></div>
+            <p class="roi-outcome-text" style="color:rgba(255,255,255,0.65)"><strong style="color:var(--white)"><span data-fr>Partenariats à plus forte valeur</span><span data-en>Higher-value partnerships</span></strong> : <span data-fr>revenus sponsoring, forums et événements premium mieux défendus</span><span data-en>sponsorship revenue, forums and premium events better defended</span></p>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:24px;">
+          <div style="font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.35);margin-bottom:12px;"><span data-fr>Avant CareerON</span><span data-en>Before CareerON</span></div>
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.45);line-height:1.6;"><span data-fr>Événements génériques. Offres envoyées à toute la promo. Peu de données sur qui cherche quoi. Partenaires insatisfaits du niveau de ciblage.</span><span data-en>Generic events. Offers sent to the whole cohort. Little data on who's looking for what. Partners unsatisfied with targeting quality.</span></p>
+        </div>
+        <div style="background:rgba(108,92,231,0.12);border:1px solid rgba(108,92,231,0.2);border-radius:16px;padding:24px;">
+          <div style="font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;color:rgba(168,155,255,0.7);margin-bottom:12px;"><span data-fr>Avec CareerON</span><span data-en>With CareerON</span></div>
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.7);line-height:1.6;"><span data-fr>Profils filtrés par secteur, ambition et maturité. Forum ciblé. Partenaires qui voient une valeur concrète dans la relation avec l'école.</span><span data-en>Profiles filtered by sector, ambition and readiness. Targeted forum. Partners who see concrete value in the school relationship.</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAKEHOLDERS -->
 <section class="audience" id="audience">
   <div class="container">
     <div class="audience-header reveal">
       <span class="eyebrow">
-        <span data-fr>Pour qui</span><span data-en>For Whom</span>
+        <span data-fr>Pour toute l'équipe carrière</span><span data-en>For the whole career team</span>
       </span>
       <h2>
-        <span data-fr>Deux interfaces.<br>Un seul système.</span>
-        <span data-en>Two interfaces.<br>One system.</span>
+        <span data-fr>Un outil qui parle<br>à chaque partie prenante.</span>
+        <span data-en>One tool that speaks<br>to every stakeholder.</span>
       </h2>
     </div>
-    <div class="audience-grid">
-      <div class="audience-card reveal">
-        <h3><span data-fr>Étudiants</span><span data-en>Students</span></h3>
-        <p class="audience-subtitle"><span data-fr>Un compagnon de parcours, pas un outil de plus.</span><span data-en>A career companion, not another tool.</span></p>
+    <!-- Directeur carrière — buyer principal -->
+    <div class="stakeholder-featured reveal">
+      <div class="stakeholder-featured-left">
+        <span class="eyebrow" style="color:rgba(168,155,255,0.85);margin-bottom:12px;"><span data-fr>Buyer principal</span><span data-en>Primary buyer</span></span>
+        <h3><span data-fr>Directeur des services carrière</span><span data-en>Career Services Director</span></h3>
+        <p class="stakeholder-featured-sub"><span data-fr>Faire plus, mieux, sans recruter proportionnellement.</span><span data-en>Do more, better, without proportional hiring.</span></p>
+        <div class="stakeholder-featured-message">
+          <span data-fr>« Vous ne manquez pas de méthode. Vous manquez de levier, de données consolidées et de temps conseiller. »</span>
+          <span data-en>"You don't lack method. You lack leverage, consolidated data, and advisor time."</span>
+        </div>
         <ul class="audience-list">
-          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Explorer des parcours avec du contenu validé</span><span data-en>Explore tracks with validated content</span></li>
-          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Coaching IA contextualisé au profil</span><span data-en>AI coaching contextualized to profile</span></li>
-          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Analyse de CV avec feedback actionnable</span><span data-en>Resume analysis with actionable feedback</span></li>
-          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Career Identity Statement automatique</span><span data-en>Auto-generated Career Identity Statement</span></li>
-          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>8 langues dont arabe (RTL)</span><span data-en>8 languages including Arabic (RTL)</span></li>
+          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Absorber plus d'étudiants sans recruter</span><span data-en>Serve more students without hiring</span></li>
+          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Détecter les cohortes à risque</span><span data-en>Detect at-risk cohorts</span></li>
+          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Prouver l'impact auprès de la direction</span><span data-en>Prove impact to leadership</span></li>
+        </ul>
+        <div style="margin-top:28px;">
+          <a href="https://cal.com/hadi-hijazi-bloq-ai/careeron-intro" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;padding:12px 22px;font-size:0.88rem;font-weight:600;text-decoration:none;border-radius:12px;background:var(--gradient);color:var(--white);">
+            <span data-fr>Montrez-moi</span><span data-en>Show me</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="stakeholder-featured-right">
+        <h4><span data-fr>Ce que CareerON leur donne</span><span data-en>What CareerON gives them</span></h4>
+        <div style="display:flex;flex-wrap:wrap;">
+          <span class="stakeholder-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Pilotage par cohorte</span><span data-en>Cohort management</span></span>
+          <span class="stakeholder-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Suivi placement temps réel</span><span data-en>Real-time placement tracking</span></span>
+          <span class="stakeholder-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Reporting automatisé</span><span data-en>Automated reporting</span></span>
+          <span class="stakeholder-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Alertes étudiants à risque</span><span data-en>At-risk student alerts</span></span>
+          <span class="stakeholder-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Données pour la direction</span><span data-en>Data for leadership</span></span>
+          <span class="stakeholder-tag"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Allocation conseillers optimisée</span><span data-en>Optimized advisor allocation</span></span>
+        </div>
+      </div>
+    </div>
+    <!-- 3 autres parties prenantes -->
+    <div class="stakeholders-grid">
+      <div class="audience-card reveal">
+        <h3><span data-fr>Conseillers carrière</span><span data-en>Career Advisors</span></h3>
+        <p class="audience-subtitle"><span data-fr>Moins d'admin. Plus de coaching.</span><span data-en>Less admin. More coaching.</span></p>
+        <ul class="audience-list">
+          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Préparation RDV en quelques secondes</span><span data-en>Meeting prep in seconds</span></li>
+          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Notes et synthèses automatiques</span><span data-en>Auto notes and summaries</span></li>
+          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Historique complet par étudiant</span><span data-en>Complete per-student history</span></li>
+          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Relances automatisées</span><span data-en>Automated follow-ups</span></li>
         </ul>
       </div>
       <div class="audience-card reveal reveal-delay-1">
-        <h3><span data-fr>Consultants Carrière</span><span data-en>Career Advisors</span></h3>
-        <p class="audience-subtitle"><span data-fr>Un cockpit pour piloter, pas juste réagir.</span><span data-en>A cockpit to lead, not just react.</span></p>
+        <h3><span data-fr>Étudiants</span><span data-en>Students</span></h3>
+        <p class="audience-subtitle"><span data-fr>Un parcours continu, pas des points de contact isolés.</span><span data-en>A continuous journey, not isolated touchpoints.</span></p>
         <ul class="audience-list">
-          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Dashboard KPIs en temps réel</span><span data-en>Real-time KPI dashboard</span></li>
-          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Alertes étudiants inactifs / prioritaires</span><span data-en>Inactive / priority student alerts</span></li>
-          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Historique complet par étudiant</span><span data-en>Complete per-student history</span></li>
-          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Gestion des parcours et ressources</span><span data-en>Track and resource management</span></li>
-          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Export CSV pour rapports</span><span data-en>CSV export for reporting</span></li>
+          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Coaching IA disponible entre les RDV</span><span data-en>AI coaching available between meetings</span></li>
+          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Analyse de CV actionnable</span><span data-en>Actionable CV analysis</span></li>
+          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Plan d'action clair après chaque RDV</span><span data-en>Clear action plan after every meeting</span></li>
+          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Suivi de progression</span><span data-en>Progress tracking</span></li>
         </ul>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- TEAM -->
-<section class="team" id="team">
-  <div class="container">
-    <div class="team-header reveal">
-      <span class="eyebrow">
-        <span data-fr>L'équipe</span><span data-en>The Team</span>
-      </span>
-      <h2>
-        <span data-fr>Entre écoles, tech<br>et terrain</span>
-        <span data-en>Between schools, tech,<br>and the field</span>
-      </h2>
-    </div>
-    <div class="team-grid">
-      <div class="team-card reveal">
-        <div class="team-initials">CS</div>
-        <h3>Clément Sporrer</h3>
-        <div class="team-role"><span data-fr>Produit & Stratégie</span><span data-en>Product & Strategy</span></div>
-        <p class="team-bio"><span data-fr>Entrepreneur et consultant entre produit, data et transformation digitale. Pont entre vision, outils et terrain.</span><span data-en>Entrepreneur and consultant across product, data, and digital transformation. Bridges vision, tools, and execution.</span></p>
-        <a href="mailto:clement@sporrer.fr" class="team-link">clement@sporrer.fr</a>
-      </div>
-      <div class="team-card reveal reveal-delay-1">
-        <div class="team-initials">HH</div>
-        <h3>Hadi Hijazi</h3>
-        <div class="team-role"><span data-fr>Ingénieur IA</span><span data-en>AI Engineer</span></div>
-        <p class="team-bio"><span data-fr>MSc ESSEC-CentraleSupélec. Ex-AI Engineer TCS. Construit des systèmes IA verticaux pour la finance et les services.</span><span data-en>MSc ESSEC-CentraleSupélec. Ex-AI Engineer at TCS. Builds vertical AI systems for finance and services.</span></p>
-        <a href="mailto:hadi.hijazi@bloq-ai.net" class="team-link">hadi.hijazi@bloq-ai.net</a>
+      <div class="audience-card reveal reveal-delay-2">
+        <h3><span data-fr>Relations entreprise</span><span data-en>Employer Relations</span></h3>
+        <p class="audience-subtitle"><span data-fr>Vendez les bons profils aux bons partenaires.</span><span data-en>Match the right profiles to the right partners.</span></p>
+        <ul class="audience-list">
+          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Meilleure connaissance des talents disponibles</span><span data-en>Better knowledge of available talent</span></li>
+          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Ciblage précis des entreprises partenaires</span><span data-en>Precise targeting of partner companies</span></li>
+          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Événements plus pertinents, moins génériques</span><span data-en>More relevant, less generic events</span></li>
+          <li><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span data-fr>Matching étudiant / opportunité qualifié</span><span data-en>Qualified student / opportunity matching</span></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -2069,7 +2413,7 @@
 
             <div class="embed-result-cta">
               <a href="https://cal.com/hadi-hijazi-bloq-ai/careeron-intro" target="_blank" rel="noopener" class="btn-primary">
-                <span data-fr>Réserver une démo</span><span data-en>Book a demo</span>
+                <span data-fr>Montrez-moi</span><span data-en>Show me</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
               <a href="calculator.html" class="embed-result-link">
@@ -2085,6 +2429,59 @@
   </div>
 </section>
 
+<!-- DIFFERENTIATION -->
+<section class="diff-section" id="differentiation">
+  <div class="container">
+    <div class="diff-header reveal">
+      <span class="eyebrow" style="color:rgba(168,155,255,0.85)">
+        <span data-fr>Ce qu'on n'est pas</span><span data-en>What we're not</span>
+      </span>
+      <h2>
+        <span data-fr>CareerON n'est pas un job board.<br>C'est le système de pilotage<br>du service carrière.</span>
+        <span data-en>CareerON isn't a job board.<br>It's the operating system<br>for career services.</span>
+      </h2>
+    </div>
+    <div class="diff-grid reveal">
+      <div class="diff-card">
+        <div class="diff-cross">✕</div>
+        <span class="diff-bad"><span data-fr>Un remplacement des conseillers</span><span data-en>A replacement for advisors</span></span>
+        <p class="diff-good"><span data-fr>CareerON <span class="accent">enlève le back-office</span> pour que vos conseillers fassent ce que seul l'humain peut faire : le coaching.</span><span data-en>CareerON <span class="accent">removes the back-office</span> so your advisors do what only humans can: coaching.</span></p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-cross">✕</div>
+        <span class="diff-bad"><span data-fr>Une promesse de placement garanti</span><span data-en>A guaranteed placement promise</span></span>
+        <p class="diff-good"><span data-fr>CareerON améliore la <span class="accent">préparation, le suivi et le pilotage</span> du placement. Le marché et l'étudiant font le reste.</span><span data-en>CareerON improves <span class="accent">preparation, tracking, and oversight</span>. The market and student do the rest.</span></p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-cross">✕</div>
+        <span class="diff-bad"><span data-fr>Une IA générique</span><span data-en>A generic AI tool</span></span>
+        <p class="diff-good"><span data-fr>Construit <span class="accent">pour les services carrière</span> : leurs rendez-vous, leurs cohortes, leurs données, leurs étudiants.</span><span data-en>Built <span class="accent">for career services</span>: their meetings, cohorts, data, students.</span></p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-cross">✕</div>
+        <span class="diff-bad"><span data-fr>Un job board nouvelle génération</span><span data-en>A next-gen job board</span></span>
+        <p class="diff-good"><span data-fr>CareerON est la <span class="accent">couche de pilotage et d'accompagnement</span> qui aide l'école à mieux préparer, suivre et positionner ses étudiants.</span><span data-en>CareerON is the <span class="accent">guidance and oversight layer</span> that helps schools better prepare, track, and position students.</span></p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-cross">✕</div>
+        <span class="diff-bad"><span data-fr>Un projet IT de 18 mois</span><span data-en>An 18-month IT project</span></span>
+        <p class="diff-good"><span data-fr>CareerON <span class="accent">s'intègre progressivement</span> à l'existant. L'objectif : de la valeur vite, pas un chantier SI.</span><span data-en>CareerON <span class="accent">integrates progressively</span>. Goal: fast value, not a years-long IT project.</span></p>
+      </div>
+      <div class="diff-card">
+        <div class="diff-cross">✕</div>
+        <span class="diff-bad"><span data-fr>Un outil de surveillance des conseillers</span><span data-en>An advisor surveillance tool</span></span>
+        <p class="diff-good"><span data-fr>CareerON <span class="accent">mesure l'activité pour améliorer le service</span>, pas pour monitorer les individus. Le conseiller reste au centre.</span><span data-en>CareerON <span class="accent">measures activity to improve the service</span>, not to monitor individuals. Advisors stay central.</span></p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:56px;" class="reveal">
+      <a href="https://cal.com/hadi-hijazi-bloq-ai/careeron-intro" target="_blank" rel="noopener" class="btn-primary">
+        <span data-fr>Montrez-moi</span><span data-en>Show me</span>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section" id="contact">
   <div class="container reveal">
@@ -2092,20 +2489,20 @@
       <span data-fr>Prêt ?</span><span data-en>Ready?</span>
     </span>
     <h2>
-      <span data-fr>Transformez vos services carrière.</span>
-      <span data-en>Transform your career services.</span>
+      <span data-fr>Passez d'un service carrière fragmenté<br>à un pilotage continu de l'employabilité.</span>
+      <span data-en>Move from a fragmented career service<br>to continuous employability management.</span>
     </h2>
     <p class="lead">
-      <span data-fr>30 minutes. Vos parcours. Notre plateforme. Voyez la différence.</span>
-      <span data-en>30 minutes. Your tracks. Our platform. See the difference.</span>
+      <span data-fr>30 minutes. On vous montre comment votre service carrière gagne en capacité, en qualité et en pilotage.</span>
+      <span data-en>30 minutes. We show you how your career service gains capacity, quality, and oversight.</span>
     </p>
     <div class="cta-buttons">
       <a href="https://cal.com/hadi-hijazi-bloq-ai/careeron-intro" target="_blank" rel="noopener" class="btn-primary">
-        <span data-fr>Réserver une démo</span><span data-en>Book a Demo</span>
+        <span data-fr>Montrez-moi</span><span data-en>Show me</span>
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <a href="mailto:hadi.hijazi@bloq-ai.net?subject=CareerON" class="btn-ghost">
-        <span data-fr>Nous contacter</span><span data-en>Contact Us</span>
+      <a href="#calculator" class="btn-ghost">
+        <span data-fr>Calculer mon ROI</span><span data-en>Calculate my ROI</span>
       </a>
     </div>
   </div>
@@ -2116,8 +2513,8 @@
   <div class="container">
     <div class="footer-logo"><img src="logo.png" class="footer-logo-img" alt="CareerON"></div>
     <div class="footer-tagline">
-      <span data-fr>Services carrière intelligents. Résultats supérieurs.</span>
-      <span data-en>Smarter career services. Stronger outcomes.</span>
+      <span data-fr>Le système opérationnel des services carrière modernes.</span>
+      <span data-en>The operating system for modern career services.</span>
     </div>
     <small>&copy; 2026 CareerON</small>
   </div>
