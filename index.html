@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="public/favicon.png">
   <link rel="apple-touch-icon" href="public/favicon.png">
   <meta property="og:title" content="CareerON : Le système opérationnel des services carrière">
-  <meta property="og:description" content="Accompagnez plus d'étudiants. Sans recruter plus.">
+  <meta property="og:description" content="Accompagnez plus d'étudiants. Pilotez leur employabilité.">
   <meta property="og:image" content="logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1576,8 +1576,8 @@
       <!-- Centre -->
       <div class="hero-center reveal">
         <h1>
-          <span data-fr>Accompagnez plus d'étudiants.<br><span class="brand-word">Sans recruter plus.</span></span>
-          <span data-en>Scale student support.<br><span class="brand-word">Without hiring more.</span></span>
+          <span data-fr>Accompagnez plus d'étudiants.<br><span class="brand-word">Pilotez leur employabilité.</span></span>
+          <span data-en>Support more students.<br><span class="brand-word">Drive their employability.</span></span>
         </h1>
         <p class="lead">
           <span data-fr>CareerON automatise le back-office de vos services carrière, centralise les données étudiants et donne à vos équipes un pilotage clair de l'accompagnement, des cohortes et des placements.</span>
@@ -2414,7 +2414,8 @@
             </div>
 
             <div class="embed-result-cta">
-              <a href="https://cal.com/hadi-hijazi-bloq-ai/careeron-intro" target="_blank" rel="noopener" class="btn-primary">
+              <input type="email" id="ec_email" class="embed-input" placeholder="Votre email professionnel" style="width:100%;text-align:center;margin-bottom:12px;font-size:0.85rem;" autocomplete="email">
+              <a href="https://cal.com/hadi-hijazi-bloq-ai/careeron-intro" target="_blank" rel="noopener" class="btn-primary" id="ec_booking_btn">
                 <span data-fr>Montrez-moi</span><span data-en>Show me</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
@@ -2617,6 +2618,56 @@
     paintSlider($hours);
     compute();
   })();
+
+  // Booking intent — POST then redirect to Cal URL
+  const CAL_FALLBACK = 'https://cal.com/hadi-hijazi-bloq-ai/careeron-intro';
+
+  async function handleBookingIntent(meetingType, extra) {
+    try {
+      const res = await fetch('/api/booking-intent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.assign({ meeting_type: meetingType }, extra || {})),
+      });
+      const json = await res.json();
+      if (json.cal_url) { window.open(json.cal_url, '_blank', 'noopener'); return; }
+    } catch (_) {}
+    window.open(CAL_FALLBACK, '_blank', 'noopener');
+  }
+
+  async function handleCalcBooking() {
+    const email = (document.getElementById('ec_email')?.value || '').trim();
+    if (email) {
+      try {
+        const res = await fetch('/api/lead-enterprise', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            students:         document.getElementById('ec_students')?.value,
+            consultants:      document.getElementById('ec_consultants')?.value,
+            salary_per_consultant: document.getElementById('ec_salary')?.value,
+            hours_weekly:     document.getElementById('ec_hours')?.value,
+          }),
+        });
+        const json = await res.json();
+        if (json.cal_url) { window.open(json.cal_url, '_blank', 'noopener'); return; }
+      } catch (_) {}
+    }
+    await handleBookingIntent('enterprise', email ? { email } : {});
+  }
+
+  // Wire all Cal.com links
+  document.querySelectorAll('a[href*="cal.com"]').forEach(link => {
+    link.addEventListener('click', async e => {
+      e.preventDefault();
+      if (link.id === 'ec_booking_btn') {
+        await handleCalcBooking();
+      } else {
+        await handleBookingIntent('enterprise');
+      }
+    });
+  });
 </script>
 </body>
 </html>
