@@ -1,4 +1,5 @@
 import { supabase } from './_db.js'
+import { emailIsValid, enforceOrigin, enforceRateLimit, honeypotTriggered } from './_request.js'
 
 const CAL_URLS = {
   enterprise: process.env.CAL_ENTERPRISE_URL,
@@ -6,13 +7,19 @@ const CAL_URLS = {
 }
 
 export default async function handler(req, res) {
+  if (!enforceOrigin(req, res)) return
   if (req.method === 'OPTIONS') return res.status(204).end()
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
+  if (!enforceRateLimit(req, res, 'booking-intent')) return
 
   const { email, school, role, meeting_type } = req.body ?? {}
+  if (honeypotTriggered(req.body)) return res.status(200).json({ ok: true })
 
   if (!meeting_type || !CAL_URLS[meeting_type]) {
     return res.status(400).json({ error: 'invalid meeting_type' })
+  }
+  if (email && !emailIsValid(email)) {
+    return res.status(400).json({ error: 'invalid email' })
   }
 
   // Store even if email missing — we still want partial data

@@ -9,10 +9,15 @@
   <link rel="apple-touch-icon" href="public/favicon.png">
   <meta property="og:title" content="CareerON : Le système opérationnel des services carrière">
   <meta property="og:description" content="Accompagnez plus d'étudiants. Pilotez leur employabilité.">
-  <meta property="og:image" content="logo.png">
+  <meta property="og:image" content="public/logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CareerON : Le système opérationnel des services carrière">
+  <meta name="twitter:description" content="Accompagnez plus d'étudiants. Pilotez leur employabilité.">
+  <meta name="twitter:image" content="public/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>document.documentElement.classList.add('js');</script>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -183,6 +188,9 @@
       transition: all 0.2s; border-radius: 1px;
     }
     nav.scrolled .mobile-toggle span { background: var(--text); }
+    nav.menu-open .mobile-toggle span:first-child { transform: translateY(3.25px) rotate(45deg); }
+    nav.menu-open .mobile-toggle span:last-child { transform: translateY(-3.25px) rotate(-45deg); }
+    .nav-mobile-panel { display: none; }
 
     /* --- HERO --- */
     .hero {
@@ -824,6 +832,18 @@
       display: flex; gap: 10px; flex-wrap: wrap;
     }
     .embed-result-cta .btn-primary { padding: 12px 22px; font-size: 0.85rem; }
+    .embed-form { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+    .form-status {
+      min-height: 20px;
+      font-size: 0.78rem;
+      line-height: 1.4;
+    }
+    .form-status[data-state="error"] { color: #FFB4B4; }
+    .form-status[data-state="success"] { color: #9AE6B4; }
+    .embed-footnote {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.45);
+    }
     .embed-result-link {
       display: inline-flex; align-items: center; gap: 6px;
       font-size: 0.82rem; color: rgba(255,255,255,0.6);
@@ -900,10 +920,10 @@
 
     /* --- ANIMATIONS --- */
     .reveal {
-      opacity: 0; transform: translateY(32px);
+      opacity: 1; transform: none;
       transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal.visible { opacity: 1; transform: none; }
     .reveal-delay-1 { transition-delay: 0.1s; }
     .reveal-delay-2 { transition-delay: 0.2s; }
     .reveal-delay-3 { transition-delay: 0.3s; }
@@ -926,12 +946,46 @@
       .mobile-toggle { display: flex; }
       nav { width: calc(100% - 32px); }
       .stat-stack { grid-template-columns: 1fr 1fr; }
+      nav.menu-open {
+        border-radius: 28px;
+        background: rgba(255,255,255,0.97);
+        border-color: rgba(0,0,0,0.07);
+      }
+      nav.menu-open::before { opacity: 0; }
+      nav.menu-open .nav-wordmark { color: var(--text); }
+      nav.menu-open .lang-btn { border-color: var(--border); color: var(--text-secondary); }
+      nav.menu-open .mobile-toggle span { background: var(--text); }
+      .nav-mobile-panel {
+        display: none;
+        padding: 0 16px 16px;
+      }
+      nav.menu-open .nav-mobile-panel { display: block; }
+      .nav-mobile-links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding-top: 8px;
+      }
+      .nav-mobile-link {
+        display: block;
+        text-decoration: none;
+        color: var(--text);
+        font-size: 0.95rem;
+        font-weight: 600;
+        padding: 12px 14px;
+        border-radius: 14px;
+        background: rgba(11,19,43,0.04);
+      }
+      .nav-mobile-link:active { background: rgba(11,19,43,0.08); }
     }
     @media (max-width: 480px) {
       h1 { font-size: 2.5rem; }
       .stat-stack { grid-template-columns: 1fr; }
       .hero-ctas { flex-direction: column; align-items: stretch; }
       .hero-ctas .btn-primary, .hero-ctas .btn-ghost { justify-content: center; }
+      .nav-actions { gap: 4px; }
+      .lang-btn { padding: 5px 9px; }
+      .nav-cta { display: none; }
     }
 
     /* ─── AESTHETIC UPGRADES ─── */
@@ -1048,7 +1102,7 @@
     .hero-aurora { display: none !important; }
     .hero-orb { display: none !important; }
     .hero-grid-bg { z-index: 2; opacity: 0.6; }
-    @media (max-width: 768px) { .hero-video { opacity: 0.65; } }
+    @media (max-width: 768px) { .hero-video { opacity: 0.48; } }
 
     /* ─── HERO CENTERED — tout sur 100vh ─── */
     .hero {
@@ -1504,8 +1558,6 @@
     }
 
   </style>
-  <script defer src="/_vercel/insights/script.js"></script>
-  <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
 
@@ -1528,9 +1580,17 @@
         <span data-fr>Montrez-moi</span><span data-en>Show me</span>
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <button class="mobile-toggle" onclick="this.classList.toggle('open')" aria-label="Menu">
+      <button class="mobile-toggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Ouvrir le menu">
         <span></span><span></span>
       </button>
+    </div>
+    <div class="nav-mobile-panel" id="mobileMenu">
+      <div class="nav-mobile-links">
+        <a href="#solution" class="nav-mobile-link"><span data-fr>Solution</span><span data-en>Solution</span></a>
+        <a href="#outcomes" class="nav-mobile-link"><span data-fr>Résultats</span><span data-en>Outcomes</span></a>
+        <a href="#audience" class="nav-mobile-link"><span data-fr>Pour qui</span><span data-en>For whom</span></a>
+        <a href="#calculator" class="nav-mobile-link"><span data-fr>Calculateur</span><span data-en>Calculator</span></a>
+      </div>
     </div>
   </div>
 </nav>
@@ -1538,8 +1598,8 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg">
-    <video class="hero-video" autoplay muted loop playsinline>
-      <source src="hero-bg.mp4" type="video/mp4">
+    <video class="hero-video" muted loop playsinline preload="none" aria-hidden="true">
+      <source data-src="hero-bg.mp4" type="video/mp4">
     </video>
     <div class="hero-video-overlay"></div>
     <div class="hero-orb hero-orb-1"></div>
@@ -2414,11 +2474,19 @@
             </div>
 
             <div class="embed-result-cta">
-              <input type="email" id="ec_email" class="embed-input" placeholder="Votre email professionnel" style="width:100%;text-align:center;margin-bottom:12px;font-size:0.85rem;" autocomplete="email">
-              <a href="https://cal.com/hadi-hijazi-bloq-ai/careeron-intro" target="_blank" rel="noopener" class="btn-primary" id="ec_booking_btn">
-                <span data-fr>Montrez-moi</span><span data-en>Show me</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
+              <form class="embed-form" id="ec_demo_form" novalidate>
+                <input type="hidden" name="website" tabindex="-1" autocomplete="off">
+                <input type="email" id="ec_email" class="embed-input" placeholder="Votre email professionnel" style="width:100%;text-align:center;font-size:0.85rem;" autocomplete="email" required>
+                <button type="submit" class="btn-primary" id="ec_booking_btn">
+                  <span data-fr>Montrez-moi</span><span data-en>Show me</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+                <div class="form-status" id="ec_form_status" aria-live="polite"></div>
+                <div class="embed-footnote">
+                  <span data-fr>On valide votre email avant redirection.</span>
+                  <span data-en>We validate your email before redirecting.</span>
+                </div>
+              </form>
               <a href="calculator.html" class="embed-result-link">
                 <span data-fr>Détail complet</span><span data-en>Full breakdown</span>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -2514,7 +2582,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="container">
-    <div class="footer-logo"><img src="logo.png" class="footer-logo-img" alt="CareerON"></div>
+    <div class="footer-logo"><img src="public/logo.png" class="footer-logo-img" alt="CareerON"></div>
     <div class="footer-tagline">
       <span data-fr>Le système opérationnel des services carrière modernes.</span>
       <span data-en>The operating system for modern career services.</span>
@@ -2532,30 +2600,80 @@
     h.setAttribute('lang', c === 'fr' ? 'en' : 'fr');
   }
 
+  const langIsFrench = () => document.documentElement.getAttribute('data-lang') === 'fr';
+  const emailIsValid = value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+
+  if (!['localhost', '127.0.0.1'].includes(window.location.hostname)) {
+    ['/_vercel/insights/script.js', '/_vercel/speed-insights/script.js'].forEach(src => {
+      const script = document.createElement('script');
+      script.defer = true;
+      script.src = src;
+      document.head.appendChild(script);
+    });
+  }
+
   // Scroll reveal
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => {
+    if (document.documentElement.classList.contains('js')) io.observe(el);
+  });
 
   // Nav scroll state
   const nav = document.getElementById('mainNav');
   const heroEnd = document.querySelector('.hero').offsetHeight - 100;
+  const mobileToggle = document.querySelector('.mobile-toggle');
   function checkScroll() {
     nav.classList.toggle('scrolled', window.scrollY > heroEnd);
   }
+  function closeMenu() {
+    nav.classList.remove('menu-open');
+    mobileToggle?.setAttribute('aria-expanded', 'false');
+  }
   window.addEventListener('scroll', checkScroll, { passive: true });
   checkScroll();
+  mobileToggle?.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('menu-open');
+    mobileToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+  document.querySelectorAll('.nav-mobile-link').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeMenu();
+  });
+  document.addEventListener('click', event => {
+    if (!nav.contains(event.target)) closeMenu();
+  });
 
   // Smooth anchor clicks
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const t = document.querySelector(a.getAttribute('href'));
-      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      if (t) {
+        e.preventDefault();
+        closeMenu();
+        t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
   });
 
-  // Embedded calculator — live computation
+  // Load hero video only when connection/device budget allows it.
+  (() => {
+    const video = document.querySelector('.hero-video');
+    const source = video?.querySelector('source[data-src]');
+    if (!video || !source) return;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const saveData = navigator.connection?.saveData;
+    const smallViewport = window.matchMedia('(max-width: 768px)').matches;
+    if (prefersReducedMotion || saveData || smallViewport) return;
+    source.src = source.dataset.src;
+    video.load();
+    video.play().catch(() => {});
+  })();
+
+  // Embedded calculator — live computation + validated form
   (function () {
     const $students    = document.getElementById('ec_students');
     const $consultants = document.getElementById('ec_consultants');
@@ -2568,6 +2686,9 @@
     const $hoursTotal   = document.getElementById('ec_hours_total');
     const $recovered    = document.getElementById('ec_recovered');
     const $hoursSaved   = document.getElementById('ec_hours_saved');
+    const $formStatus   = document.getElementById('ec_form_status');
+    const $demoForm     = document.getElementById('ec_demo_form');
+    const $demoBtn      = document.getElementById('ec_booking_btn');
 
     const fmtMoney = n => {
       if (n >= 1000000) return '€' + (n / 1000000).toFixed(1) + 'M';
@@ -2581,12 +2702,15 @@
     };
 
     function paintSlider(el) {
-      const min = +el.min || 0, max = +el.max || 100, val = +el.value;
+      const min = +el.min || 0;
+      const max = +el.max || 100;
+      const val = +el.value;
       const pct = ((val - min) / (max - min)) * 100;
       el.style.background = `linear-gradient(to right, #6C5CE7 0%, #2979FF ${pct}%, #F2F4F7 ${pct}%, #F2F4F7 100%)`;
     }
 
     function compute() {
+      const students    = Math.max(100, +$students.value || 2000);
       const consultants = Math.max(1, +$consultants.value || 1);
       const salary      = Math.max(20000, +$salary.value || 45000);
       const hoursWeek   = Math.max(1, +$hours.value || 20);
@@ -2594,8 +2718,10 @@
       const workingWeeks = 46;
       const weeklyHours  = 38;
       const automationRate = 0.70;
+      const studentsPerAdvisor = students / consultants;
+      const loadFactor = Math.min(1.6, Math.max(0.8, studentsPerAdvisor / 500));
 
-      const annualManualHours = hoursWeek * workingWeeks * consultants;
+      const annualManualHours = hoursWeek * workingWeeks * consultants * loadFactor;
       const hourlyRate        = salary / (workingWeeks * weeklyHours);
       const costOfWaste       = annualManualHours * hourlyRate;
       const hoursSaved        = annualManualHours * automationRate;
@@ -2615,56 +2741,77 @@
       });
     });
 
-    paintSlider($hours);
-    compute();
-  })();
+    $demoForm?.addEventListener('submit', async event => {
+      event.preventDefault();
+      const email = (document.getElementById('ec_email')?.value || '').trim();
+      const website = $demoForm.elements.website?.value || '';
+      if (!emailIsValid(email)) {
+        $formStatus.textContent = langIsFrench()
+          ? 'Entrez un email professionnel valide.'
+          : 'Enter a valid work email.';
+        $formStatus.dataset.state = 'error';
+        return;
+      }
 
-  // Booking intent — POST then redirect to Cal URL
-  const CAL_FALLBACK = 'https://cal.com/hadi-hijazi-bloq-ai/careeron-intro';
+      $demoBtn.disabled = true;
+      $formStatus.textContent = langIsFrench() ? 'Validation en cours...' : 'Validating...';
+      $formStatus.dataset.state = '';
 
-  async function handleBookingIntent(meetingType, extra) {
-    try {
-      const res = await fetch('/api/booking-intent', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(Object.assign({ meeting_type: meetingType }, extra || {})),
-      });
-      const json = await res.json();
-      if (json.cal_url) { window.open(json.cal_url, '_blank', 'noopener'); return; }
-    } catch (_) {}
-    window.open(CAL_FALLBACK, '_blank', 'noopener');
-  }
-
-  async function handleCalcBooking() {
-    const email = (document.getElementById('ec_email')?.value || '').trim();
-    if (email) {
       try {
         const res = await fetch('/api/lead-enterprise', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             email,
-            students:         document.getElementById('ec_students')?.value,
-            consultants:      document.getElementById('ec_consultants')?.value,
+            website,
+            students: document.getElementById('ec_students')?.value,
+            consultants: document.getElementById('ec_consultants')?.value,
             salary_per_consultant: document.getElementById('ec_salary')?.value,
-            hours_weekly:     document.getElementById('ec_hours')?.value,
+            hours_weekly: document.getElementById('ec_hours')?.value,
+            source_page: 'landing-embed',
           }),
         });
         const json = await res.json();
-        if (json.cal_url) { window.open(json.cal_url, '_blank', 'noopener'); return; }
-      } catch (_) {}
+        if (!res.ok || !json.cal_url) throw new Error(json.error || 'Submission failed');
+        $formStatus.textContent = langIsFrench() ? 'Email validé. Redirection...' : 'Email validated. Redirecting...';
+        $formStatus.dataset.state = 'success';
+        window.location.assign(json.cal_url);
+      } catch (error) {
+        console.error('[lead-enterprise]', error);
+        $formStatus.textContent = langIsFrench()
+          ? 'Envoi impossible. Réessayez ou écrivez-nous directement.'
+          : 'Could not submit. Try again or contact us directly.';
+        $formStatus.dataset.state = 'error';
+      } finally {
+        $demoBtn.disabled = false;
+      }
+    });
+
+    paintSlider($hours);
+    compute();
+  })();
+
+  async function handleBookingIntent(meetingType, extra) {
+    const res = await fetch('/api/booking-intent', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(Object.assign({ meeting_type: meetingType }, extra || {})),
+    });
+    const json = await res.json();
+    if (!res.ok || !json.cal_url) {
+      throw new Error(json.error || 'Booking failed');
     }
-    await handleBookingIntent('enterprise', email ? { email } : {});
+    window.location.assign(json.cal_url);
   }
 
-  // Wire all Cal.com links
+  // Wire all Cal.com links except validated calculator form.
   document.querySelectorAll('a[href*="cal.com"]').forEach(link => {
     link.addEventListener('click', async e => {
       e.preventDefault();
-      if (link.id === 'ec_booking_btn') {
-        await handleCalcBooking();
-      } else {
+      try {
         await handleBookingIntent('enterprise');
+      } catch (error) {
+        console.error('[booking-intent]', error);
       }
     });
   });

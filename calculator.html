@@ -458,7 +458,7 @@
 
 <nav>
   <div class="inner">
-    <a href="index.html" class="nav-logo"><img src="icon.png" class="brand-mark" alt="">Career<span>ON</span></a>
+    <a href="index.html" class="nav-logo"><img src="public/icon.png" class="brand-mark" alt="">Career<span>ON</span></a>
     <a href="index.html" class="nav-back">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M10 3L5 8l5 5"/>
@@ -515,7 +515,7 @@
         </div>
         <div class="field">
           <label class="field-label" for="student_ratio">
-            Students per consultant <span>(ratio)</span>
+            Target students per consultant <span>(ratio)</span>
           </label>
           <div class="field-input-wrap">
             <input class="field-input" type="number" id="student_ratio" placeholder="e.g. 500" min="10" max="5000">
@@ -641,12 +641,19 @@
         <h2>See it live in your institution</h2>
         <p>We'll walk you through a 30-min demo using your actual numbers — no pitch deck, no bullshit.</p>
         <div class="cta-btns">
-          <a href="https://cal.com/hadi-hijazi-bloq-ai/careeron-intro" target="_blank" rel="noopener" class="btn-primary">
-            Book a demo
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M3 8h10M9 4l4 4-4 4"/>
-            </svg>
-          </a>
+          <form id="demo_form" style="width:100%;max-width:440px;margin:0 auto;" novalidate>
+            <input type="hidden" name="website" tabindex="-1" autocomplete="off">
+            <div class="field-input-wrap" style="margin-bottom:12px;">
+              <input class="field-input" type="email" id="demo_email" placeholder="your.name@institution.edu" autocomplete="email" required>
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">
+              Book a demo
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M3 8h10M9 4l4 4-4 4"/>
+              </svg>
+            </button>
+            <div id="demo_form_status" style="min-height:20px;margin-top:10px;font-size:0.78rem;" aria-live="polite"></div>
+          </form>
           <a href="index.html" class="btn-ghost">Learn more →</a>
         </div>
       </div>
@@ -677,6 +684,7 @@
 
   // Init slider fills
   ['qa_hours','match_hours','cv_hours','admin_hours'].forEach(id => updateSliderFill(id));
+  const emailIsValid = value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
   function fmt(n) {
     if (n >= 1000000) return '€' + (n/1000000).toFixed(1) + 'M';
@@ -695,21 +703,23 @@
     const students = parseFloat(document.getElementById('students').value) || 2000;
     const consultants = parseFloat(document.getElementById('consultants').value) || 4;
     const salary = parseFloat(document.getElementById('salary').value) || 45000;
+    const studentRatio = parseFloat(document.getElementById('student_ratio').value) || 500;
 
     const qa_h = parseFloat(document.getElementById('qa_hours').value);
     const match_h = parseFloat(document.getElementById('match_hours').value);
     const cv_h = parseFloat(document.getElementById('cv_hours').value);
     const admin_h = parseFloat(document.getElementById('admin_hours').value);
 
-    const total_manual_per_consultant = qa_h + match_h + cv_h + admin_h;
     const working_weeks = 46;
     const weekly_hours = 38;
+    const currentRatio = students / Math.max(consultants, 1);
+    const loadFactor = Math.min(2.2, Math.max(0.7, currentRatio / Math.max(studentRatio, 50)));
 
     // Annual hours
-    const qa_annual = qa_h * working_weeks * consultants;
-    const match_annual = match_h * working_weeks * consultants;
-    const cv_annual = cv_h * working_weeks * consultants;
-    const admin_annual = admin_h * working_weeks * consultants;
+    const qa_annual = qa_h * working_weeks * consultants * loadFactor;
+    const match_annual = match_h * working_weeks * consultants * loadFactor;
+    const cv_annual = cv_h * working_weeks * consultants * loadFactor;
+    const admin_annual = admin_h * working_weeks * consultants * loadFactor;
     const total_manual_annual = qa_annual + match_annual + cv_annual + admin_annual;
 
     // Cost (hourly rate from salary)
@@ -793,6 +803,51 @@
       </div>
     `;
   }
+
+  document.getElementById('demo_form')?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const statusEl = document.getElementById('demo_form_status');
+    const email = (document.getElementById('demo_email')?.value || '').trim();
+    const website = event.currentTarget.elements.website?.value || '';
+
+    if (!emailIsValid(email)) {
+      statusEl.textContent = 'Enter a valid work email.';
+      statusEl.style.color = '#FFB4B4';
+      return;
+    }
+
+    statusEl.textContent = 'Validating...';
+    statusEl.style.color = 'rgba(255,255,255,0.7)';
+
+    try {
+      const res = await fetch('/api/lead-enterprise', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          website,
+          students: document.getElementById('students')?.value,
+          consultants: document.getElementById('consultants')?.value,
+          salary_per_consultant: document.getElementById('salary')?.value,
+          target_students_per_consultant: document.getElementById('student_ratio')?.value,
+          qa_hours: document.getElementById('qa_hours')?.value,
+          match_hours: document.getElementById('match_hours')?.value,
+          cv_hours: document.getElementById('cv_hours')?.value,
+          admin_hours: document.getElementById('admin_hours')?.value,
+          source_page: 'calculator',
+        }),
+      });
+      const json = await res.json();
+      if (!res.ok || !json.cal_url) throw new Error(json.error || 'Submission failed');
+      statusEl.textContent = 'Email validated. Redirecting...';
+      statusEl.style.color = '#9AE6B4';
+      window.location.assign(json.cal_url);
+    } catch (error) {
+      console.error('[lead-enterprise]', error);
+      statusEl.textContent = 'Could not submit. Try again or contact us directly.';
+      statusEl.style.color = '#FFB4B4';
+    }
+  });
 </script>
 </body>
 </html>

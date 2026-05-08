@@ -3,7 +3,7 @@ import { supabase } from '../_db.js'
 
 function verifySignature(rawBody, signature) {
   const secret = process.env.CAL_WEBHOOK_SECRET
-  if (!secret) return true // skip verification if secret not configured
+  if (!secret) return false
   const expected = createHmac('sha256', secret).update(rawBody).digest('hex')
   return signature === expected
 }
@@ -12,6 +12,10 @@ export const config = { api: { bodyParser: false } }
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end()
+  if (!process.env.CAL_WEBHOOK_SECRET) {
+    console.error('[cal-webhook] missing CAL_WEBHOOK_SECRET')
+    return res.status(500).json({ error: 'Webhook secret not configured' })
+  }
 
   const chunks = []
   for await (const chunk of req) chunks.push(chunk)
